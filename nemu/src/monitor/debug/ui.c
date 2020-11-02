@@ -38,6 +38,46 @@ static int cmd_q(char *args) {
 
 static int cmd_help(char *args);
 
+/* more executive functions */
+static int cmd_si(char *args) {
+  int count = 0;
+  if (!args) {
+    cpu_exec(1);
+    return 0;
+  }
+  if ((count = atoi(args)) == 0) {
+    printf("%s is not a number.(Please input a integer)");
+    return 0;
+  }
+  cpu_exec(count);
+  return 0;
+}
+
+static int cmd_info(char *args) {
+  cpu_exec(N);
+  return 0;
+}
+
+static int cmd_p(char *args) {
+  cpu_exec(N);
+  return 0;
+}
+
+static int cmd_x(char *args) {
+  cpu_exec(N);
+  return 0;
+}
+
+static int cmd_w(char *args) {
+  cpu_exec(N);
+  return 0;
+}
+
+static int cmd_d(char *args) {
+  cpu_exec(N);
+  return 0;
+}
+
 static struct {
   char *name;
   char *description;
@@ -46,8 +86,13 @@ static struct {
   { "help", "Display informations about all supported commands", cmd_help },
   { "c", "Continue the execution of the program", cmd_c },
   { "q", "Exit NEMU", cmd_q },
-
   /* TODO: Add more commands */
+  { "si", "'si [N]' Single step N times,when N is not given,the default is 1", cmd_si },
+  { "info", "'info r' Print register state;'info w' Print watchpoint informations", cmd_info },
+  { "p", "'p EXPR' Evaluate the EXPR", cmd_p },
+  { "x", "'x N EXPR' Evaluate the EXPR,using the result as staring address which outputs N consecutive 4 bytes in hex", cmd_x },
+  { "w", "'w EXPR' When the value of EXPR changed,pause the execution of the program", cmd_w },
+  { "d", "'d N' Delete watchpoint numbered N", cmd_d }
 
 };
 
