@@ -68,8 +68,17 @@ static int cmd_p(char *args) {
   return 0;
 }
 
+//FIXME: EXPR here just is a immediate operend, but it should be expression
 static int cmd_x(char *args) {
-  cpu_exec(N);
+  int count = 0;
+  int N;
+  uint32_t address;
+  count = sscanf(args, "%d,%#x", N, address);
+  if (count != 2) {
+    printf("Error args. Try input x [N] [EXPR]\n");
+    return 0;
+  }
+  
   return 0;
 }
 

@@ -40,7 +40,12 @@ void reg_test() {
   assert(pc_sample == cpu.pc);
 }
 
+/* finished registers dispaly */
 void isa_reg_display() {
+  int i;
+  for (i = R_EAX; i <= R_EDI; i++) {
+    printf("%s\t%#x\t%d\n", regsl[i], reg_l(i), reg_l(i));
+  }
 }
 
 uint32_t isa_reg_str2val(const char *s, bool *success) {
