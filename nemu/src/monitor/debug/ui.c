@@ -45,8 +45,13 @@ static int cmd_si(char *args) {
     cpu_exec(1);
     return 0;
   }
+  //FIXME: For floating number, atoi() also return its integral form, but nemu should raise a exception
   if ((count = atoi(args)) == 0) {
-    printf("%s is not a number.(Please input a integer)");
+    printf("%s is not a number.(Please input a integer)\n", args);
+    return 0;
+  }
+  else if (count == -1) {
+    printf("%s is out of range\n");
     return 0;
   }
   cpu_exec(count);
