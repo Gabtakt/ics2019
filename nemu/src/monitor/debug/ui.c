@@ -40,26 +40,32 @@ static int cmd_help(char *args);
 
 /* more executive functions */
 static int cmd_si(char *args) {
-  int count = 0;
-  if (!args) {
-    cpu_exec(1);
-    return 0;
+  char *arg = strtok(NULL, " ");
+  int count = 1;
+  if (arg) {
+    count = atoi(arg);
   }
-  //FIXME: For floating number, atoi() also return its integral form, but nemu should raise a exception
-  if ((count = atoi(args)) == 0) {
-    printf("%s is not a number.(Please input a integer)\n", args);
-    return 0;
-  }
-  else if (count == -1) {
-    printf("%s is out of range\n",args);
-    return 0;
+  if (count <= 0){
+    printf("%s : Parameter is invalid.\n", arg);
   }
   cpu_exec(count);
   return 0;
 }
 
 static int cmd_info(char *args) {
-  //cpu_exec(N);
+  char *arg = strtok(NULL, " ");
+  if (!arg) {
+    printf("the introduction 'info' miss parameters.\n");
+  }
+  else if (strcmp(arg, "r") == 0) {
+    isa_reg_display();
+  }
+  else if (strcmp(arg, "w") == 0) {
+    //TODO:
+  }
+  else {
+    printf("Invalid parameter.\n");
+  }
   return 0;
 }
 
