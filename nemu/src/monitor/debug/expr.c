@@ -7,10 +7,20 @@
 #include <regex.h>
 
 enum {
-  TK_NOTYPE = 256, TK_EQ
-
+  TK_NOTYPE = 256,
   /* TODO: Add more token types */
-
+  TK_NUM,
+  TK_HEX,
+  TK_REG,
+  TK_PLUS,
+  TK_MINUS,
+  TK_MUL,
+  TK_DIV,
+  TK_EQ,
+  TK_AND,
+  TK_OR,
+  TK_LBR,
+  TK_RBR
 };
 
 static struct rule {
@@ -22,9 +32,19 @@ static struct rule {
    * Pay attention to the precedence level of different rules.
    */
 
-  {" +", TK_NOTYPE},    // spaces
-  {"\\+", '+'},         // plus
-  {"==", TK_EQ}         // equal
+  {" +", TK_NOTYPE},                 // spaces
+  {"0[Xx][0-9a-fA-f]+", TK_HEX},     // hex
+  {"[0-9]+", TK_NUM},                // num
+  {"\\$[a-zA-z]{2,3}", TK_REG},      // register
+  {"\\+", TK_PLUS},                  // plus
+  {"-", TK_MINUS},                   // minus
+  {"\\*", TK_MUL},                   // mutiply
+  {"/", TK_DIV},                     // divide
+  {"==", TK_EQ},                     // equal
+  {"&&", TK_AND},                    // logical and
+  {"\\|\\|", TK_OR},                 // logical or
+  {"\\(", TK_LBR},                   // left bracket
+  {"\\)", TK_RBR},                   // right bracket
 };
 
 #define NR_REGEX (sizeof(rules) / sizeof(rules[0]) )
@@ -78,11 +98,31 @@ static bool make_token(char *e) {
          * to record the token in the array `tokens'. For certain types
          * of tokens, some extra actions should be performed.
          */
-
-        switch (rules[i].token_type) {
-          default: TODO();
+        if (substr_len >= 32)
+        {
+          Log("Token is too long.\n");
+          assert(0);
+          return false;
         }
-
+        if (nr_token > 32)
+        {
+          Log("Parameter 'nr_token' is out of range.\n");
+          assert(0);
+          return false;
+        }
+        switch (rules[i].token_type) {
+          case TK_NOTYPE:
+            break;
+          case TK_NUM:
+          case TK_HEX:
+          case TK_REG:
+            strncpy(tokens[nr_token].str, substr_start, substr_len);
+            tokens[nr_token].str[nr_token] = '\0';
+          // public action
+          default:
+            tokens[nr_token].type = rules[i].token_type;
+            nr_token++;
+        }
         break;
       }
     }

@@ -98,7 +98,7 @@ static int cmd_x(char *args) {
         uint32_t data = vaddr_read(addr, 4);
         printf("0x%08x%s", data, (i & 3) == 3?"\n" : "    ");
       }
-      
+      printf("\n");
     }
     
   }
