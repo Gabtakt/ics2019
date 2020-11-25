@@ -59,12 +59,12 @@ static int cmd_si(char *args) {
 }
 
 static int cmd_info(char *args) {
-  cpu_exec(N);
+  //cpu_exec(N);
   return 0;
 }
 
 static int cmd_p(char *args) {
-  cpu_exec(N);
+  //cpu_exec(N);
   return 0;
 }
 
@@ -83,12 +83,12 @@ static int cmd_x(char *args) {
 }
 
 static int cmd_w(char *args) {
-  cpu_exec(N);
+  //cpu_exec(N);
   return 0;
 }
 
 static int cmd_d(char *args) {
-  cpu_exec(N);
+  //cpu_exec(N);
   return 0;
 }
 
