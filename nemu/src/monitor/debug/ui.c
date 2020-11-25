@@ -79,7 +79,7 @@ static int cmd_x(char *args) {
   int count = 0;
   int N;
   uint32_t address;
-  count = sscanf(args, "%d,%#X", &N, &address);
+  count = sscanf(args, "%d,0x%x", N, address);
   if (count != 2) {
     printf("Error args. Try input x [N] [EXPR]\n");
     return 0;
