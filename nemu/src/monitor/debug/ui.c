@@ -51,7 +51,7 @@ static int cmd_si(char *args) {
     return 0;
   }
   else if (count == -1) {
-    printf("%s is out of range\n");
+    printf("%s is out of range\n",args);
     return 0;
   }
   cpu_exec(count);
@@ -73,7 +73,7 @@ static int cmd_x(char *args) {
   int count = 0;
   int N;
   uint32_t address;
-  count = sscanf(args, "%d,%#x", &N, &address);
+  count = sscanf(args, "%d,%#X", &N, &address);
   if (count != 2) {
     printf("Error args. Try input x [N] [EXPR]\n");
     return 0;
