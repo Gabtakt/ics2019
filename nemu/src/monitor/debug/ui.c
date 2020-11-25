@@ -94,9 +94,9 @@ static int cmd_x(char *args) {
       //accroding sscanf to put in addr,then addr = abfedf,no warning and no error will be raise
       sscanf(arg2, "%x", &addr);
       int i;
-      for (i = 0; i < N; i++) {
+      for (i = 0; i < N; i++, addr += 4) {
         uint32_t data = vaddr_read(addr, 4);
-        printf("0x%08x%s", data, i & 3 == 3?"\n" : "    ");
+        printf("0x%08x%s", data, (i & 3) == 3?"\n" : "    ");
       }
       
     }
