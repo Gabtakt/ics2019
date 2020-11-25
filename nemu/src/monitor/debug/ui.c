@@ -76,15 +76,32 @@ static int cmd_p(char *args) {
 
 //FIXME: EXPR here just is a immediate operend, but it should be expression
 static int cmd_x(char *args) {
-  int count = 0;
-  int N;
-  uint32_t address;
-  count = sprintf(args, "%d,0x%x", N, address);
-  if (count != 2) {
-    printf("Error args. Try input x [N] [EXPR]\n");
-    return 0;
+  char *arg1 = strtok(NULL, " ");
+  char *arg2 = strtok(NULL, " ");
+  if (arg1 == NULL || arg2 == NULL)
+  {
+    printf("the introduction 'info' miss parameters.\n");
   }
-  
+  else {
+    int N = atoi(arg1);
+    if (N <= 0)
+    {
+      printf("Invalid parameter.\n");
+    }
+    else {
+      vaddr_t addr = 0x0;
+      //FIXME: The validity of parameter arg2 is not determined,e.g:arg2 is "abfdefg0"
+      //accroding sscanf to put in addr,then addr = abfedf,no warning and no error will be raise
+      sscanf(arg2, "%x", &addr);
+      int i;
+      for (i = 0; i < N; i++) {
+        uint32_t data = vaddr_read(addr, 4);
+        printf("%#08x%*c", data, i & 3 == 3?'\n' : ' ');
+      }
+      
+    }
+    
+  }
   return 0;
 }
 
