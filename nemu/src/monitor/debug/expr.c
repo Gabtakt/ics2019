@@ -326,15 +326,12 @@ uint32_t eval(int p, int q, bool *success)
   switch (tokens[pos].type) {
     case TK_PLUS:
       val =  left_val + right_val;
-      printf("%d = %d + %d\n",val,left_val,right_val);
       break;
     case TK_MINUS:
       val = left_val - right_val;
-      printf("%d = %d - %d\n",val,left_val,right_val);
       break;
     case TK_MUL:
       val = left_val * right_val;
-      printf("%d = %d * %d\n",val,left_val,right_val);
       break;
     case TK_DIV:
       if (right_val == 0) {
@@ -343,7 +340,6 @@ uint32_t eval(int p, int q, bool *success)
         return 0;
       }
       val = left_val / right_val;
-      printf("%d = %d / %d\n",val,left_val,right_val);
       break;
     case TK_OR:
       val = left_val || right_val;
