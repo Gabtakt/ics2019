@@ -310,7 +310,6 @@ uint32_t eval(int p, int q, bool *success)
   int pos = get_main_op(p, q);
   if(pos == -1) {
     *success = false;
-    printf("33333\n");
     return 0;
   }
   uint32_t left_val = 0, right_val = 0, val = 0;
