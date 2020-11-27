@@ -4,7 +4,7 @@
 #include <time.h>
 #include <assert.h>
 
-#define NR_TOKEN 10
+#define NR_TOKEN 100
 #define BUF_LEN 40960
 // this should be enough
 static char buf[BUF_LEN];
@@ -17,7 +17,10 @@ static uint32_t choose(uint32_t n) {
 
 static inline void gen_rand_expr(int l,int r) {
   int pos;
-  if (l == r){
+  if (l > r) {
+    return;
+  }
+  if (l == r) {
     buf[l] = choose(9)+'1';
   }
   else if (l == r - 1) {
@@ -25,17 +28,18 @@ static inline void gen_rand_expr(int l,int r) {
 	  buf[r] = choose(9)+'1';
   }
   else {
-	  switch(choose(1)) {
+    /* 10% expression with parentheses */
+	  switch(choose(10)) {
 		  case 0:
+			  buf[l] = '(';
+			  buf[r] = ')';
+			  gen_rand_expr(l + 1, r - 1);
+			  break;
+		  default:
         pos = l + 1 + choose(r - l - 1);
 			  gen_rand_expr(l, pos - 1);
 			  buf[pos] = ops[choose(4)];
 			  gen_rand_expr(pos + 1, r);
-			  break;
-		  default:
-			  buf[l]='(';
-			  buf[r]=')';
-			  gen_rand_expr(l + 1, r - 1);
 			  break;
 	  }
   }
