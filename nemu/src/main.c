@@ -15,8 +15,7 @@ void test_expr() {
 	char Expr[6000];
 	bool pass = true;
 	int count = 0, passed = 0;
-	while(fscanf(fp, "%u %s", &std_ret, Expr) != EOF)
-	{
+	while(fscanf(fp, "%u %s", &std_ret, Expr) != EOF) {
 		count++;
 		success = true;
 		my_ret = expr(Expr, &success);
@@ -30,10 +29,7 @@ void test_expr() {
 			passed++;
 		}
 	}
-	
-	if(pass) {
-		printf("total passed: [%d/%d].\n",passed, count);
-	}
+	printf("total passed: [%d/%d].\n",passed, count);
 }	
 
 
