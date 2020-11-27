@@ -324,7 +324,7 @@ uint32_t eval(int p, int q, bool *success)
       val = left_val - right_val;
       break;
     case TK_MUL:
-      val = left_val + right_val;
+      val = left_val * right_val;
       break;
     case TK_DIV:
       if (right_val == 0) {
