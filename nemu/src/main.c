@@ -21,7 +21,7 @@ void test_expr() {
 		my_ret = expr(Expr, &success);
 		if(!success || my_ret != std_ret){
 			pass = false;
-			printf("expr test failed at: %s\n", Expr);
+			printf("expr test failed at[%d]: %s\n", count, Expr);
 			printf("std result: %u, my result %u\n", std_ret, my_ret);
 		}else{
 			// printf("test passed at: %s\n", Expr);
