@@ -4,7 +4,7 @@
 #include <time.h>
 #include <assert.h>
 
-#define NR_TOKEN 128
+#define NR_TOKEN 32
 #define BUF_LEN 40960
 // this should be enough
 static char buf[BUF_LEN];

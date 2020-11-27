@@ -352,7 +352,6 @@ uint32_t eval(int p, int q, bool *success)
       printf("Unknown token %s.\n",tokens[pos].str);
       break;
   }
-  printf("type %d, result %d.\n",tokens[pos].type, val);
   return val;
 }
 
