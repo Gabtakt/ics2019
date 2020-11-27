@@ -14,8 +14,10 @@ void test_expr() {
 	bool success;
 	char Expr[6000];
 	bool pass = true;
+	int count = 0, passed = 0;
 	while(fscanf(fp, "%u %s", &std_ret, Expr) != EOF)
 	{
+		count++;
 		success = true;
 		my_ret = expr(Expr, &success);
 		if(!success || my_ret != std_ret){
@@ -25,11 +27,12 @@ void test_expr() {
 		}else{
 			printf("test passed at: %s\n", Expr);
 			printf("std result: %u, my result %u\n", std_ret, my_ret);
+			passed++;
 		}
 	}
 	
 	if(pass) {
-		printf("Congratulations! You have passed all the test cases.\n");
+		printf("total passed: [%d/%d].\n",passed, count);
 	}
 }	
 
