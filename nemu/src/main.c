@@ -5,7 +5,7 @@ void ui_mainloop(int);
 void test_expr() {
 	FILE *fp = fopen("tools/gen-expr/input", "r");
 	if(fp == NULL) {
-		Log("File: %s open failed\n", "tools/gen-expr/input");
+		printf("File: %s open failed\n", "tools/gen-expr/input");
 		return ;
 	}
 	//Log("Testing the expr eval...\n");
