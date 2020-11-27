@@ -3,7 +3,7 @@ int init_monitor(int, char *[]);
 void ui_mainloop(int);
 
 void test_expr() {
-	FILE *fp = fopen("tools/gen-expr/input", "r");
+	FILE *fp = fopen("tools/gen-expr/input2", "r");
 	if(fp == NULL) {
 		printf("File: %s open failed\n", "tools/gen-expr/input");
 		return ;
@@ -21,16 +21,15 @@ void test_expr() {
 		my_ret = expr(Expr, &success);
 		if(!success || my_ret != std_ret){
 			pass = false;
-			printf("%s\n",Expr);
-			// printf("expr test failed at[%d]: %s\n", count, Expr);
-			// printf("std result: %u, my result %u\n", std_ret, my_ret);
+			printf("expr test failed at[%d]: %s\n", count, Expr);
+			printf("std result: %u, my result %u\n", std_ret, my_ret);
 		}else{
 			// printf("test passed at: %s\n", Expr);
 			// printf("std result: %u, my result %u\n", std_ret, my_ret);
 			passed++;
 		}
 	}
-	//printf("total passed: [%d/%d].\n",passed, count);
+	printf("total passed: [%d/%d].\n",passed, count);
 }	
 
 
