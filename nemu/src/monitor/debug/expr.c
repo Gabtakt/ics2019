@@ -277,7 +277,7 @@ uint32_t eval(int p, int q, bool *success)
   else if (p == q) {
     int type = tokens[p].type;
     if (type == TK_NUM || type == TK_HEX) {
-      printf("num %d\n",strtoul(tokens[p].str, NULL, 0));
+      printf("num %s\n",tokens[p].str);
       return strtoul(tokens[p].str, NULL, 0);
     }
     if (type == TK_REG) {
