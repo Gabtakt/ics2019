@@ -148,12 +148,12 @@ uint32_t expr(char *e, bool *success) {
   int i;
   // find dereferance op and fix its type
   for (i = 0; i < nr_token; i++) {
-    if (tokens[i].type == TK_MUL && i == 0 || tokens[i - 1].type != TK_NUM &&
-        tokens[i - 1].type != TK_HEX && tokens[i - 1].type != TK_REG && tokens[i - 1].type != TK_RBR) {
+    if (tokens[i].type == TK_MUL && (i == 0 || tokens[i - 1].type != TK_NUM &&
+        tokens[i - 1].type != TK_HEX && tokens[i - 1].type != TK_REG && tokens[i - 1].type != TK_RBR)) {
       tokens[i].type = TK_DEREF;
     }
-    else if (tokens[i].type == TK_MINUS && i == 0 || tokens[i - 1].type != TK_NUM &&
-             tokens[i - 1].type != TK_HEX && tokens[i - 1].type != TK_REG && tokens[i - 1].type != TK_RBR) {
+    else if (tokens[i].type == TK_MINUS && (i == 0 || tokens[i - 1].type != TK_NUM &&
+             tokens[i - 1].type != TK_HEX && tokens[i - 1].type != TK_REG && tokens[i - 1].type != TK_RBR)) {
       tokens[i].type = TK_NEG;
     }
   }
