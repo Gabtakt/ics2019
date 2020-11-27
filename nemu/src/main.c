@@ -8,7 +8,7 @@ void test_expr() {
 		printf("File: %s open failed\n", "tools/gen-expr/input");
 		return ;
 	}
-	//Log("Testing the expr eval...\n");
+	Log("Testing the expr eval...\n");
 
 	uint32_t std_ret, my_ret;
 	bool success;

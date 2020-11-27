@@ -7,9 +7,12 @@
 #include <regex.h>
 #include <stdlib.h>
 
+/* pa1.2
+ * 2020-11-26
+ * implements calculate the value of the expression
+ * */
 enum {
   TK_NOTYPE = 256,
-  /* TODO: Add more token types */
   TK_NUM,
   TK_HEX,
   TK_REG,
@@ -30,11 +33,6 @@ static struct rule {
   char *regex;
   int token_type;
 } rules[] = {
-
-  /* TODO: Add more rules.
-   * Pay attention to the precedence level of different rules.
-   */
-
   {" +", TK_NOTYPE},                 // spaces
   {"0[Xx][0-9a-fA-f]+", TK_HEX},     // hex
   {"[0-9]+", TK_NUM},                // num
@@ -49,12 +47,12 @@ static struct rule {
   {"\\(", TK_LBR},                   // left bracket
   {"\\)", TK_RBR},                   // right bracket
 };
+
 uint32_t isa_reg_str2val(const char *s,bool *success);
 int check_parentheses(int p, int q);
 uint32_t expr(char *e, bool *success);
 int get_main_op(int p, int q);
 uint32_t eval(int p, int q, bool *success);
-
 
 #define NR_REGEX (sizeof(rules) / sizeof(rules[0]) )
 
@@ -103,18 +101,14 @@ static bool make_token(char *e) {
             i, rules[i].regex, position, substr_len, substr_len, substr_start);
         position += substr_len;
 
-        /* TODO: Now a new token is recognized with rules[i]. Add codes
-         * to record the token in the array `tokens'. For certain types
-         * of tokens, some extra actions should be performed.
-         */
-        if (substr_len >= 32)
-        {
+        /* the string length is out of range */
+        if (substr_len >= 32) {
           Log("Token is too long.\n");
           assert(0);
           return false;
         }
-        if (nr_token > 1024)
-        {
+        /* the number of tokens is out of range */
+        if (nr_token >= 65536) {
           Log("Parameter 'nr_token' is out of range.\n");
           assert(0);
           return false;
@@ -145,7 +139,6 @@ static bool make_token(char *e) {
   }
   return true;
 }
-uint32_t eval(int p, int q, bool *success);
 
 uint32_t expr(char *e, bool *success) {
   if (!make_token(e)) {

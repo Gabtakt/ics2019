@@ -38,7 +38,10 @@ static int cmd_q(char *args) {
 
 static int cmd_help(char *args);
 
-/* more executive functions */
+/* pa1.1
+ * 2020-11-03
+ * implement command si, info, x
+ */
 static int cmd_si(char *args) {
   char *arg = strtok(NULL, " ");
   int count = 1;
@@ -123,7 +126,7 @@ static struct {
   { "help", "Display informations about all supported commands", cmd_help },
   { "c", "Continue the execution of the program", cmd_c },
   { "q", "Exit NEMU", cmd_q },
-  /* TODO: Add more commands */
+  /* pa1.1 add more commands */
   { "si", "'si [N]' Single step N times,when N is not given,the default is 1", cmd_si },
   { "info", "'info r' Print register state;'info w' Print watchpoint informations", cmd_info },
   { "p", "'p EXPR' Evaluate the EXPR", cmd_p },

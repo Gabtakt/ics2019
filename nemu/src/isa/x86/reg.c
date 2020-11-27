@@ -39,8 +39,10 @@ void reg_test() {
 
   assert(pc_sample == cpu.pc);
 }
-
-/* finished registers dispaly */
+/* pa1.1
+ * 2020-11-25
+ * finished registers display
+ */
 void isa_reg_display() {
   int i;
   printf("pc\t0x%08x\t%u\n", cpu.pc, cpu.pc);
@@ -49,6 +51,10 @@ void isa_reg_display() {
   }
 }
 
+/* pa1.2
+ * 2020-11-26
+ * finished get the value of registers,searching by name
+ */
 uint32_t isa_reg_str2val(const char *s, bool *success) {
   *success = true;
   if (strcmp(s, "pc") == 0 || strcmp(s, "eip") == 0) {
