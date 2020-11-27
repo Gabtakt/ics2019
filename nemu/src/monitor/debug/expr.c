@@ -120,6 +120,8 @@ static bool make_token(char *e) {
             strncpy(tokens[nr_token].str, substr_start, substr_len);
             tokens[nr_token].str[substr_len] = '\0';
             tokens[nr_token].type = rules[i].token_type;
+            // mark me
+            printf("num %s\n",tokens[nr_token]);
             nr_token++;
         }
         break;
@@ -265,6 +267,7 @@ uint32_t eval(int p, int q, bool *success)
   /* bad expression */
   if (p > q) {
     *success = false;
+    printf("11111\n");
     return 0;
   }
   /* single token, it is a number or register */
@@ -282,6 +285,7 @@ uint32_t eval(int p, int q, bool *success)
     }
     /* bad expression */
     *success = false;
+    printf("22222\n");
     return 0;
   }
   int ret = check_parentheses(p, q);
@@ -297,6 +301,7 @@ uint32_t eval(int p, int q, bool *success)
   int pos = get_main_op(p, q);
   if(pos == -1) {
     *success = false;
+    printf("33333\n");
     return 0;
   }
   uint32_t left_val = 0, right_val = 0, val = 0;
