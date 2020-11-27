@@ -15,8 +15,7 @@ void test_expr() {
 	char Expr[6000];
 	bool pass = true;
 	int count = 0, passed = 0;
-	//while(fscanf(fp, "%u %s", &std_ret, Expr) != EOF) {
-	while(fscanf(fp, "%s", Expr) != EOF) {
+	while(fscanf(fp, "%u %s", &std_ret, Expr) != EOF) {
 		count++;
 		success = true;
 		my_ret = expr(Expr, &success);
