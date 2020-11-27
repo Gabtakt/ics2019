@@ -75,7 +75,7 @@ typedef struct token {
   char str[32];
 } Token;
 
-static Token tokens[1024] __attribute__((used)) = {};
+static Token tokens[65536] __attribute__((used)) = {};
 static int nr_token __attribute__((used))  = 0;
 
 static bool make_token(char *e) {
@@ -138,6 +138,7 @@ static bool make_token(char *e) {
   }
   return true;
 }
+uint32_t eval(int p, int q, bool *success);
 
 uint32_t expr(char *e, bool *success) {
   if (!make_token(e)) {
