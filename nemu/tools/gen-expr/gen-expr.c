@@ -28,18 +28,17 @@ static inline void gen_rand_expr(int l,int r) {
 	  buf[r] = choose(9)+'1';
   }
   else {
-    /* 10% expression with parentheses */
-	  switch(choose(10)) {
+	  switch(choose(1)) {
 		  case 0:
-			  buf[l] = '(';
-			  buf[r] = ')';
-			  gen_rand_expr(l + 1, r - 1);
-			  break;
-		  default:
         pos = l + 1 + choose(r - l - 1);
 			  gen_rand_expr(l, pos - 1);
 			  buf[pos] = ops[choose(4)];
 			  gen_rand_expr(pos + 1, r);
+		  default:
+			  buf[l] = '(';
+			  buf[r] = ')';
+			  gen_rand_expr(l + 1, r - 1);
+			  break;
 			  break;
 	  }
   }
