@@ -121,7 +121,7 @@ static bool make_token(char *e) {
             tokens[nr_token].str[substr_len] = '\0';
             tokens[nr_token].type = rules[i].token_type;
             // mark me
-            printf("num %s\n",tokens[nr_token]);
+            printf("num %s\n",tokens[nr_token].str);
             nr_token++;
         }
         break;
