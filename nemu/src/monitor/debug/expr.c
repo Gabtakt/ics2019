@@ -271,7 +271,6 @@ uint32_t eval(int p, int q, bool *success)
   /* bad expression */
   if (p > q) {
     *success = false;
-    printf("!!!1\n");
     return 0;
   }
   /* single token, it is a number or register */
@@ -289,7 +288,6 @@ uint32_t eval(int p, int q, bool *success)
     }
     /* bad expression */
     *success = false;
-    printf("!!!2\n");
     return 0;
   }
   int ret = check_parentheses(p, q);
@@ -305,7 +303,6 @@ uint32_t eval(int p, int q, bool *success)
   int pos = get_main_op(p, q);
   if(pos == -1) {
     *success = false;
-    printf("!!!3\n");
     return 0;
   }
   uint32_t left_val = 0, right_val = 0, val = 0;
@@ -355,6 +352,7 @@ uint32_t eval(int p, int q, bool *success)
       printf("Unknown token %s.\n",tokens[pos].str);
       break;
   }
+  printf("type %d, result %d.\n",tokens[pos].type, val);
   return val;
 }
 
