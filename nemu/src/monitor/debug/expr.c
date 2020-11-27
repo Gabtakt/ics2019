@@ -185,11 +185,18 @@ int check_parentheses(int p, int q) {
 
 	/* special case 2, eg: '(1 + 2) * (3 + 4)' should return 0 rather than 1.
    * before here we matched the parentheses and makesure the position of
-   * '(' is p and the position of ')' is q, then if we find any ')' or
-   * '(' in the range of p+1 ~ q-1, we can assert it is a special case. 
+   * '(' is p and the position of ')' is q, then if we find the number of
+   * ')' are more than'(' in the range of p+1 ~ q-1, we can assert it is
+   * a special case. 
    */
 	for(i = p + 1; i <= q - 1; i++) {
-		if(tokens[i].type == TK_LBR || tokens[i].type == TK_RBR) {
+		if(tokens[i].type == TK_LBR) {
+      count++;
+    }
+		else if(tokens[i].type == TK_RBR) {
+      count--;
+    }
+		if(count < 0) {
       return 0;
     }
 	}
