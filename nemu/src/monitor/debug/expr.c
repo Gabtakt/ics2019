@@ -116,17 +116,10 @@ static bool make_token(char *e) {
         switch (rules[i].token_type) {
           case TK_NOTYPE:
             break;
-          // case TK_NUM:
-          // case TK_HEX:
-          // case TK_REG:
-            // strncpy(tokens[nr_token].str, substr_start, substr_len);
-            // tokens[nr_token].str[nr_token] = '\0';
-          // public action
           default:
             strncpy(tokens[nr_token].str, substr_start, substr_len);
             tokens[nr_token].str[substr_len] = '\0';
             tokens[nr_token].type = rules[i].token_type;
-            printf("type %d, val %s\n",tokens[nr_token].type, tokens[nr_token].str);
             nr_token++;
         }
         break;
@@ -278,7 +271,6 @@ uint32_t eval(int p, int q, bool *success)
   else if (p == q) {
     int type = tokens[p].type;
     if (type == TK_NUM || type == TK_HEX) {
-      printf("num %s\n",tokens[p].str);
       return strtoul(tokens[p].str, NULL, 0);
     }
     if (type == TK_REG) {
@@ -321,15 +313,12 @@ uint32_t eval(int p, int q, bool *success)
   switch (tokens[pos].type) {
     case TK_PLUS:
       val =  left_val + right_val;
-      printf("%d + %d = %d\n",left_val, right_val, val);
       break;
     case TK_MINUS:
       val = left_val - right_val;
-      printf("%d - %d = %d\n",left_val, right_val, val);
       break;
     case TK_MUL:
       val = left_val * right_val;
-      printf("%d * %d = %d\n",left_val, right_val, val);
       break;
     case TK_DIV:
       if (right_val == 0) {
@@ -338,7 +327,6 @@ uint32_t eval(int p, int q, bool *success)
         return 0;
       }
       val = left_val / right_val;
-      printf("%d / %d = %d\n",left_val, right_val, val);
       break;
     case TK_OR:
       val = left_val || right_val;
