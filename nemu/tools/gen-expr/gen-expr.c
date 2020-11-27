@@ -3,7 +3,6 @@
 #include <stdlib.h>
 #include <time.h>
 #include <assert.h>
-#include <string.h>
 
 // this should be enough
 static char buf[65536];
