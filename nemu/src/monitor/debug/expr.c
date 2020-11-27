@@ -49,6 +49,12 @@ static struct rule {
   {"\\(", TK_LBR},                   // left bracket
   {"\\)", TK_RBR},                   // right bracket
 };
+uint32_t isa_reg_str2val(const char *s,bool *success);
+int check_parentheses(int p, int q);
+uint32_t expr(char *e, bool *success);
+int get_main_op(int p, int q);
+uint32_t eval(int p, int q, bool *success);
+
 
 #define NR_REGEX (sizeof(rules) / sizeof(rules[0]) )
 
