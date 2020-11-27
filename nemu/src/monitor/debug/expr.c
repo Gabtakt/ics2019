@@ -116,9 +116,9 @@ static bool make_token(char *e) {
         switch (rules[i].token_type) {
           case TK_NOTYPE:
             break;
-          case TK_NUM:
-          case TK_HEX:
-          case TK_REG:
+          // case TK_NUM:
+          // case TK_HEX:
+          // case TK_REG:
             // strncpy(tokens[nr_token].str, substr_start, substr_len);
             // tokens[nr_token].str[nr_token] = '\0';
           // public action
@@ -277,6 +277,7 @@ uint32_t eval(int p, int q, bool *success)
   else if (p == q) {
     int type = tokens[p].type;
     if (type == TK_NUM || type == TK_HEX) {
+      printf("num %d\n",strtoul(tokens[p].str, NULL, 0));
       return strtoul(tokens[p].str, NULL, 0);
     }
     if (type == TK_REG) {
