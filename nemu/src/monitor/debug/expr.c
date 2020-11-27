@@ -206,6 +206,7 @@ int check_parentheses(int p, int q) {
 int get_priority(int type) {
 	int priority = 0;
 	switch(type) {
+    case TK_NOTYPE:
     case TK_NUM:
     case TK_HEX:
     case TK_REG:
@@ -241,13 +242,13 @@ int get_priority(int type) {
 /* return the position of the main op, if there is no main op, return -1 */
 int get_main_op(int p, int q) {
 	int inBracket = 0, i, pos = -1;
-  int MIN_PRIORITY = get_priority(TK_NUM), MAX_PRIORITY = get_priority(TK_LBR);
+  int MIN_PRIORITY = get_priority(TK_REG), MAX_PRIORITY = get_priority(TK_LBR);
   int cur_min_priority = MAX_PRIORITY,cur_priority = cur_min_priority;
 	for(i = p; i <= q; i++) {
 		int type = tokens[i].type;
+    cur_priority = get_priority(type);
     /* if it in the parentheses and op is not '(' or ')' or number,it is op */
-		if(!inBracket && type > MIN_PRIORITY && type < MAX_PRIORITY) {
-      cur_priority = get_priority(type);
+		if(!inBracket && cur_priority > MIN_PRIORITY && cur_priority < MAX_PRIORITY) {
       /* get the position of the most right mian op  */
 			if (cur_priority <= cur_min_priority) {
         pos = i;
