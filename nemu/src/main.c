@@ -1,44 +1,44 @@
 #include "monitor/expr.h"
+
+//#define EXPR_TEST
+
 int init_monitor(int, char *[]);
 void ui_mainloop(int);
 
+#ifdef EXPR_TEST
 void test_expr() {
 	FILE *fp = fopen("tools/gen-expr/input", "r");
 	if(fp == NULL) {
 		printf("File: %s open failed\n", "tools/gen-expr/input");
 		return ;
 	}
-	Log("Testing the expr eval...\n");
-
-	uint32_t std_ret, my_ret;
+	uint32_t std_ret, expr_ret;
 	bool success;
-	char Expr[6000];
-	bool pass = true;
+	char exp[6000];
 	int count = 0, passed = 0;
-	while(fscanf(fp, "%u %s", &std_ret, Expr) != EOF) {
+	while(fscanf(fp, "%u %s", &std_ret, exp) != EOF) {
 		count++;
 		success = true;
-		my_ret = expr(Expr, &success);
-		if(!success || my_ret != std_ret){
-			pass = false;
-			printf("expr test failed at[%d]: %s\n", count, Expr);
-			printf("std result: %u, my result %u\n", std_ret, my_ret);
+		expr_ret = expr(exp, &success);
+		if(!success || expr_ret != std_ret) {
+			printf("expr test failed at[%d]: %s\n", count, exp);
+			printf("std result: %u, my result %u\n", std_ret, expr_ret);
 		}else{
-			// printf("test passed at: %s\n", Expr);
-			// printf("std result: %u, my result %u\n", std_ret, my_ret);
 			passed++;
 		}
 	}
 	printf("total passed: [%d/%d].\n",passed, count);
 }	
-
+#endif
 
 int main(int argc, char *argv[]) {
   /* Initialize the monitor. */
   int is_batch_mode = init_monitor(argc, argv);
 
   /* test pa1.2 */
-  //test_expr();
+  #ifdef EXPR_TEST
+  test_expr();
+  #endif
 
   /* Receive commands from user. */
   ui_mainloop(is_batch_mode);

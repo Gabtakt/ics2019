@@ -87,7 +87,7 @@ static int cmd_p(char *args) {
       printf("Invalid expression '%s'\n", args);
     }
     else {
-      printf ("0x%x(%u)", result, result);
+      printf ("0x%x(%u)\n", result, result);
     }
   }
   return 0;
