@@ -58,7 +58,7 @@ static int cmd_si(char *args) {
 static int cmd_info(char *args) {
   char *arg = strtok(NULL, " ");
   if (!arg) {
-    printf("the introduction 'info' miss parameters.\n");
+    printf("the commond 'info' miss parameters.\n");
   }
   else if (strcmp(arg, "r") == 0) {
     isa_reg_display();
@@ -72,8 +72,24 @@ static int cmd_info(char *args) {
   return 0;
 }
 
+/* pa1.2
+ * 2020-11-28
+ * implements commond p
+ *  */
 static int cmd_p(char *args) {
-  //cpu_exec(N);
+  if (args == NULL) {
+    printf("the commond 'p' miss parameters.\n");
+  }
+  else {
+    bool success = true;
+    uint32_t result = expr(args, &success);
+    if (!success) {
+      printf("Invalid expression '%s'\n", args);
+    }
+    else {
+      printf ("0x%x(%u)", result, result);
+    }
+  }
   return 0;
 }
 
@@ -83,7 +99,7 @@ static int cmd_x(char *args) {
   char *arg2 = strtok(NULL, " ");
   if (arg1 == NULL || arg2 == NULL)
   {
-    printf("the introduction 'info' miss parameters.\n");
+    printf("the commomd 'x' miss parameters.\n");
   }
   else {
     int N = atoi(arg1);

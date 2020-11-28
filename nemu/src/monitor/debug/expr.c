@@ -263,12 +263,6 @@ int get_main_op(int p, int q) {
       inBracket--;
     }
 	}
-  if (pos == -1) {
-    for (i = p; i <= q; i++) {
-      printf("%s",tokens[i].str);
-    }
-    printf("\n");
-  }
 	return pos;
 }
 
