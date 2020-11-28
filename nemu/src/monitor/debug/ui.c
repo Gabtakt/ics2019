@@ -77,14 +77,15 @@ static int cmd_info(char *args) {
  * implements commond p
  *  */
 static int cmd_p(char *args) {
-  if (args == NULL) {
+  char *arg = strtok(NULL, " ");
+  if (arg == NULL) {
     printf("the commond 'p' miss parameters.\n");
   }
   else {
     bool success = true;
-    uint32_t result = expr(args, &success);
+    uint32_t result = expr(arg, &success);
     if (!success) {
-      printf("Invalid expression '%s'\n", args);
+      printf("Invalid expression '%s'\n", arg);
     }
     else {
       printf ("0x%x(%u)\n", result, result);
@@ -123,14 +124,46 @@ static int cmd_x(char *args) {
   }
   return 0;
 }
-
+/* pa1.3
+ * 2020-11-28
+ * implements commond w,d
+ * */
 static int cmd_w(char *args) {
-  //cpu_exec(N);
+  char *arg = strtok(NULL, " ");
+  if (arg == NULL) {
+    printf("the commond 'w' miss parameters.\n");
+  }
+  else {
+    WP *p = new_wp();
+    bool success = true;
+    strcpy(p->expr, arg);
+    p->val = expr(p->expr, &success);
+    p->count = 0;
+    if (!success) {
+      printf("Expression: %s cannot caculate,setting watchlpoint failed.\n", p->expr);
+      free_wp(p);
+    }
+    else {
+      printf("Set watchpoint %d : %s\n", p->NO, p->expr);
+    }
+  }
   return 0;
 }
 
 static int cmd_d(char *args) {
-  //cpu_exec(N);
+  char *arg = strtok(NULL, " ");
+  if (arg == NULL) {
+    printf("the commond d miss parameter.\n");
+  }
+  else {
+    int NO = atoi(arg);
+    if (NO < 0) {
+      printf("Invalid parameter: %s.\n", arg);
+    }
+    else {
+      delete_wp(NO);
+    }
+  }
   return 0;
 }
 
