@@ -8,8 +8,6 @@ typedef union {
 //  uint32_t rs     :  5;
 //  uint32_t opcode :  6;
   };
-
-  /*test*/
   struct {
     uint32_t imm    : 16;
 //  uint32_t rt     :  5;
