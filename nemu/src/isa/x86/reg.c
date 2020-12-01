@@ -49,6 +49,7 @@ void isa_reg_display() {
   for (i = R_EAX; i <= R_EDI; i++) {
     printf("%s\t0x%08x\t%u\n", regsl[i], reg_l(i), reg_l(i));
   }
+  printf("!!!\n");
 }
 
 /* pa1.2
