@@ -64,9 +64,9 @@ void cpu_exec(uint64_t n) {
    * 2020-11-28
    * watchpoint update, stop the program
    */
-  // if (watch_wp()) {
-  //   nemu_state.state = NEMU_STOP;
-  // }
+  if (watch_wp()) {
+    nemu_state.state = NEMU_STOP;
+  }
 
 #endif
 
