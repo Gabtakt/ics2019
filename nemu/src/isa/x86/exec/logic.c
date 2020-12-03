@@ -17,7 +17,7 @@ make_EHelper(and) {
   // update ZF and SF
   rtl_update_ZFSF(&s0, id_dest->width);
   // set OF and CF to zero
-  s1 = 0;
+  rtl_li(&s1, 0);
   rtl_set_OF(&s1);
   rtl_set_CF(&s1);
 
@@ -35,7 +35,7 @@ make_EHelper(xor) {
   rtl_update_ZFSF(&s0, id_dest->width);
   print_asm_template2(xor);
   // set OF and CF to zero
-  s1 = 0;
+  rtl_li(&s1, 0);
   rtl_set_OF(&s1);
   rtl_set_CF(&s1);
 

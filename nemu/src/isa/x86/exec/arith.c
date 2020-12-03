@@ -1,9 +1,20 @@
 #include "cpu/exec.h"
 
 make_EHelper(add) {
-  TODO();
-
+  /* pa2.2
+   * 2020-12-3
+   * use registers: s0, 
+   */
+  rtl_add(&s0, &id_dest->val, &id_src->val);
+  if (id_dest->width != 4) {
+    rtl_andi(&s0, &s0, 0xffffffffu >> ((4 - id_dest->width) * 8));
+  }
+  operand_write(id_dest, &s0);
+  // update ZF and SF
+  rtl_update_ZFSF(&s0, id_dest->width);
   print_asm_template2(add);
+  // update CF
+  rtl_is_add_carry(&s1, &s0, &id_dest->val);
 }
 
 make_EHelper(sub) {
@@ -12,8 +23,6 @@ make_EHelper(sub) {
    * use registers: s0, s1
    */
   rtl_sub(&s1, &id_dest->val, &id_src->val);
-  // write back the operand
-  operand_write(id_dest, &s1);
   // update OF
   rtl_is_sub_overflow(&s0, &s1, &id_dest->val, &id_src->val, id_dest->width);
   rtl_set_OF(&s0);
@@ -22,7 +31,9 @@ make_EHelper(sub) {
   // update CF
   rtl_is_sub_carry(&s0, &s1, &id_dest->val);
   rtl_set_CF(&s0);
-  
+  // write back the operand
+  operand_write(id_dest, &s1);
+
   print_asm_template2(sub);
 }
 
