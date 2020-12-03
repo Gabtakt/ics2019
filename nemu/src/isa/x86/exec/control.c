@@ -42,7 +42,7 @@ make_EHelper(ret) {
    * ret: eip/ip <- pop()
    */
   rtl_pop(&decinfo.jmp_pc);
-  rtl_j(&decinfo.jmp_pc);
+  rtl_j(decinfo.jmp_pc);
   print_asm("ret");
 }
 
