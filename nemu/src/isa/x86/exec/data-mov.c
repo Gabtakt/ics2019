@@ -6,7 +6,12 @@ make_EHelper(mov) {
 }
 
 make_EHelper(push) {
-  TODO();
+  /* pa2.1
+   * 2020-12-1
+   * connect: x86/decode.c make_DHelper(push)
+   * use rtl_push() to push value into memory
+   */
+  rtl_push(&id_dest->val);
 
   print_asm_template1(push);
 }

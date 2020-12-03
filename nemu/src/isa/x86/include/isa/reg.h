@@ -31,6 +31,37 @@ typedef struct {
     };
   };
 
+  /* pa2.1
+   * 2020-12-2
+   * EFLAGS
+   * Bit  Name   Function
+     0   CF     Carry Flag -- Set on high-order bit carry or borrow; cleared
+                 otherwise.
+     6   ZF     Zero Flag -- Set if result is zero; cleared otherwise.
+     7   SF     Sign Flag -- Set equal to high-order bit of result (0 is
+                 positive, 1 if negative).
+     9   IF     Interrupt Enable -- Setting IF allows the CPU to recognize
+                 external (maskable) interrupt requests. Clearing IF disables
+                 these interrupts.
+     11  OF     Overflow Flag -- Set if result is too large a positive number
+                 or too small a negative number (excluding sign-bit) to fit in
+                 destination operand; cleared otherwise.            
+   * 
+   */
+  union {
+    struct {
+      uint32_t CF : 1;
+      uint32_t : 5;
+      uint32_t ZF : 1;
+      uint32_t SF : 1;
+      uint32_t : 1;
+      uint32_t IF : 1;
+      uint32_t : 1;
+      uint32_t OF : 1;
+    };
+    uint32_t eflags_val;
+  } EFLAGS;
+  
   vaddr_t pc;
 
 } CPU_state;
@@ -45,6 +76,11 @@ static inline int check_reg_index(int index) {
 #define reg_l(index) (cpu.gpr[check_reg_index(index)]._32)
 #define reg_w(index) (cpu.gpr[check_reg_index(index)]._16)
 #define reg_b(index) (cpu.gpr[check_reg_index(index) & 0x3]._8[index >> 2])
+/* pa2.1 
+ * 2020-12-2
+ * add a diefine of reg_f(index)
+ */
+#define reg_f(name) (cpu.EFLAGS.name)
 
 static inline const char* reg_name(int index, int width) {
   extern const char* regsl[];

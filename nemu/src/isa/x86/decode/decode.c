@@ -31,7 +31,13 @@ static inline make_DopHelper(SI) {
    *
    op->simm = ???
    */
-  TODO();
+  /* pa2.1
+   * 2020-12-1
+   * usage register: s0, s1
+   *  */
+  s0 = instr_fetch(pc, op->width);
+  rtl_sext(&s1, &s0, op->width);
+  op->simm = s1;
 
   rtl_li(&op->val, op->simm);
 

@@ -14,7 +14,19 @@ make_EHelper(and) {
 }
 
 make_EHelper(xor) {
-  TODO();
+  /* pa2.1
+   * 2020-12-2
+   * use registers: s0
+   */
+  rtl_xor(&s0, &id_dest->val, &id_src->val);
+  operand_write(id_dest, &s0);
+  // updat ZF and SF
+  rtl_update_ZFSF(&s0, id_dest->width);
+  print_asm_template2(xor);
+  // set OF and CF to zero
+  s1 = 0;
+  rtl_set_OF(&s1);
+  rtl_set_CF(&s1);
 
   print_asm_template2(xor);
 }

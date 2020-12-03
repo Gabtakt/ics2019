@@ -7,8 +7,22 @@ make_EHelper(add) {
 }
 
 make_EHelper(sub) {
-  TODO();
-
+  /* pa2.1
+   * 2020-12-2
+   * use registers: s0, s1
+   */
+  rtl_sub(&s1, &id_dest->val, &id_src->val);
+  // write back the operand
+  operand_write(id_dest, &s1);
+  // update OF
+  rtl_is_sub_overflow(&s0, &s1, &id_dest->val, &id_src->val, id_dest->width);
+  rtl_set_OF(&s0);
+  // update ZF and SF
+  rtl_update_ZFSF(&s1, id_dest->width);
+  // update CF
+  rtl_is_sub_carry(&s0, &s1, &id_dest->val);
+  rtl_set_CF(&s0);
+  
   print_asm_template2(sub);
 }
 
