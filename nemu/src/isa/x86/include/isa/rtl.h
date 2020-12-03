@@ -77,7 +77,20 @@ static inline void rtl_is_sub_carry(rtlreg_t* dest,
 static inline void rtl_is_add_overflow(rtlreg_t* dest,
     const rtlreg_t* res, const rtlreg_t* src1, const rtlreg_t* src2, int width) {
   // dest <- is_overflow(src1 + src2)
-  TODO();
+  /* pa2.2
+   * 2020-12-3
+   */
+  t0 = (*src1) >> (width * 8 - 1) & 0x1;
+  t1 = (*src2) >> (width * 8 - 1) & 0x1;
+  rtl_xor(&t1, &t0, &t1);
+  if (t1 == 0) {
+    *dest = 0;
+  }
+  else {
+    t1 = (*res) >> (width * 8 - 1) & 0x1;
+    rtl_xor(&t1, &t0, &t1);
+    *dest = t1;
+  }
 }
 
 static inline void rtl_is_add_carry(rtlreg_t* dest,
