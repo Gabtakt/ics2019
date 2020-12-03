@@ -17,7 +17,8 @@ make_EHelper(xor);
 make_EHelper(ret);
 
 /* pa2.2
- * begin: 2020-12-3
- * end:
+ * 2020-12-3
+ * test code: add-longlong.c
  */
 make_EHelper(lea);
+make_EHelper(and);

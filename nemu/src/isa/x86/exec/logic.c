@@ -8,7 +8,18 @@ make_EHelper(test) {
 }
 
 make_EHelper(and) {
-  TODO();
+  /* pa2.2
+   * 2020-12-3
+   * use registers: s0
+   * */
+  rtl_and(&s0, &id_dest->val, &id_src->val);
+  operand_write(id_dest, &s0);
+  // update ZF and SF
+  rtl_update_ZFSF(&s0, id_dest->width);
+  // set OF and CF to zero
+  s1 = 0;
+  rtl_set_OF(&s1);
+  rtl_set_CF(&s1);
 
   print_asm_template2(and);
 }
