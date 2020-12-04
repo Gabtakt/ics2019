@@ -2,7 +2,17 @@
 #include "cc.h"
 
 make_EHelper(test) {
-  TODO();
+  /* pa2.2
+   * 2020-12-4
+   * use registers: s0, s1
+   */
+  rtl_and(&s0, &id_dest->val, &id_src->val);
+  // update ZF and SF
+  rtl_update_ZFSF(&s0, id_dest->width);
+  // set OF and CF to zero
+  rtl_li(&s1, 0);
+  rtl_set_OF(&s1);
+  rtl_set_CF(&s1);
 
   print_asm_template2(test);
 }
@@ -11,7 +21,7 @@ make_EHelper(and) {
   /* pa2.2
    * 2020-12-3
    * use registers: s0
-   * */
+   */
   rtl_and(&s0, &id_dest->val, &id_src->val);
   operand_write(id_dest, &s0);
   // update ZF and SF
