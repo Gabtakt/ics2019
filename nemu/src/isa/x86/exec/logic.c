@@ -43,7 +43,19 @@ make_EHelper(xor) {
 }
 
 make_EHelper(or) {
-  TODO();
+  /* pa2.2
+   * 2020-12-4
+   * use registers: 
+   */
+  rtl_or(&s0, &id_dest->val, &id_src->val);
+  operand_write(id_dest, &s0);
+  // updat ZF and SF
+  rtl_update_ZFSF(&s0, id_dest->width);
+  print_asm_template2(xor);
+  // set OF and CF to zero
+  rtl_li(&s1, 0);
+  rtl_set_OF(&s1);
+  rtl_set_CF(&s1);
 
   print_asm_template2(or);
 }
