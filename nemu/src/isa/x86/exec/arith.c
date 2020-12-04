@@ -3,7 +3,7 @@
 make_EHelper(add) {
   /* pa2.2
    * 2020-12-3
-   * use registers: s0, 
+   * use registers: s0, s1
    */
   rtl_add(&s0, &id_dest->val, &id_src->val);
   if (id_dest->width != 4) {
