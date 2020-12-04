@@ -17,7 +17,6 @@ make_EHelper(push) {
 }
 
 make_EHelper(pop) {
-  TODO();
 
   print_asm_template1(pop);
 }
@@ -35,7 +34,13 @@ make_EHelper(popa) {
 }
 
 make_EHelper(leave) {
-  TODO();
+  /* pa2.2
+   * 2020-12-4
+   * NOTE: do not check isa_oprand_size_16, because NEMU is
+   * a 32-bit emulator.
+   */
+  rtl_mv(&reg_l(R_ESP), &reg_l(R_EBP));
+  rtl_pop(&reg_l(R_EBP));
 
   print_asm("leave");
 }
