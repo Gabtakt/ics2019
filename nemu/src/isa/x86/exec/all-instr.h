@@ -52,3 +52,9 @@ make_EHelper(not);
 make_EHelper(imul2);
 make_EHelper(cltd);
 make_EHelper(idiv);
+
+/* pa2.2
+ * 2020-12-5
+ * test code: fact.c
+ */
+make_EHelper(jmp);
