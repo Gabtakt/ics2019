@@ -22,6 +22,7 @@ make_EHelper(pop) {
    */
   rtl_pop(&s0);
   operand_write(id_dest, &s0);
+  // rtl_pop(&id_dest->val);
 
   print_asm_template1(pop);
 }
