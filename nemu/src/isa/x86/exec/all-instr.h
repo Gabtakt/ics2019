@@ -44,3 +44,9 @@ make_EHelper(sar);
 make_EHelper(shl);
 make_EHelper(dec);
 make_EHelper(not);
+
+/* pa2.2
+ * 2020-12-5
+ * test code: div.c
+ */
+make_EHelper(imul2);
