@@ -26,24 +26,18 @@ make_EHelper(jmp_rm) {
 
 make_EHelper(call) {
   // the target address is calculated at the decode stage
-  /* pa2.1
-   * 2020-12-1
-   * connect: x86/decode.c make_DHelper(call)
-   * use rtl_push() to save pc, then use rtl_j() to jump dest pc
-   */
+  /* PA2.1 */
   rtl_push(&decinfo.seq_pc);
   rtl_j(decinfo.jmp_pc);
+
   print_asm("call %x", decinfo.jmp_pc);
 }
 
 make_EHelper(ret) {
-  /* pa2.1
-   * 2020-12-2
-   * ret: eip/ip <- pop()
-   */
+  /* PA2.1 */
   rtl_pop(&decinfo.jmp_pc);
   rtl_j(decinfo.jmp_pc);
-  
+
   print_asm("ret");
 }
 
@@ -54,7 +48,10 @@ make_EHelper(ret_imm) {
 }
 
 make_EHelper(call_rm) {
-  TODO();
+  /* PA2.2 */
+  rtl_push(&decinfo.seq_pc);
+  decinfo.is_jmp=0;
+  decinfo.seq_pc=id_dest->val;
 
   print_asm("call *%s", id_dest->str);
 }
