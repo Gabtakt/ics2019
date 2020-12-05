@@ -58,3 +58,8 @@ make_EHelper(idiv);
  * test code: fact.c
  */
 make_EHelper(jmp);
+
+/* pa2.2
+ * 2020-12-5
+ * test code: goldbach.c
+ */
