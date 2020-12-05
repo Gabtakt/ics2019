@@ -115,7 +115,13 @@ make_EHelper(setcc) {
 }
 
 make_EHelper(not) {
-  TODO();
+  /* pa2.2
+   * 2020-12-5
+   * NOTE: not instruction does not change any FLAGS
+   * use registers: s0
+   */
+  rtl_not(&s0, &id_dest->val);
+  operand_write(id_dest, &s0);
 
   print_asm_template1(not);
 }
