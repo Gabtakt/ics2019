@@ -59,7 +59,7 @@ make_EHelper(cltd) {
   if (decinfo.isa.is_operand_size_16) {
     rtl_sext(&s0, &reg_l(R_EAX), 2);
     rtl_sari(&s0, &s0, 0xf);
-    rtl_sr(R_DX,&s0,2);
+    rtl_sr(R_DX, &s0, 2);
   }
   else {
     rtl_sari(&reg_l(R_EDX), &reg_l(R_EAX), 0x1f);
