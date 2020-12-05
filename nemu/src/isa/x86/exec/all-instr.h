@@ -41,3 +41,4 @@ make_EHelper(pop);
  * test code: bit.c
  */
 make_EHelper(sar);
+make_EHelper(shl);
