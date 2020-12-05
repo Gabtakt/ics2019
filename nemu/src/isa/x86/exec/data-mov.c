@@ -20,7 +20,8 @@ make_EHelper(pop) {
   /* pa2.2
    * 2020-12-5
    */
-  rtl_pop(&id_dest->val);
+  rtl_pop(&s0);
+  operand_write(id_dest, &s0);
 
   print_asm_template1(pop);
 }
