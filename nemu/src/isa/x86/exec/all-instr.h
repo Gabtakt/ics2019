@@ -9,6 +9,7 @@ make_EHelper(nemu_trap);
 
 /* pa2.1
  * 2020-12-2
+ * test code: dummy.c
  */
 make_EHelper(call);
 make_EHelper(push);
