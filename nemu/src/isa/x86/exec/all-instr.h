@@ -35,3 +35,9 @@ make_EHelper(leave);
 make_EHelper(inc);
 make_EHelper(cmp);
 make_EHelper(pop);
+
+/* pa2.2
+ * 2020-12-5
+ * test code: bit.c
+ */
+make_EHelper(sar);
