@@ -50,3 +50,4 @@ make_EHelper(not);
  * test code: div.c
  */
 make_EHelper(imul2);
+make_EHelper(cltd);

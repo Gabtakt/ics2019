@@ -52,11 +52,17 @@ make_EHelper(leave) {
 }
 
 make_EHelper(cltd) {
+  /* pa2.2
+   * 2020-12-5
+   * use registers: 
+   */
   if (decinfo.isa.is_operand_size_16) {
-    TODO();
+    rtl_sext(&s0, &reg_l(R_EAX), 2);
+    rtl_sari(&s0, &s0, 0xf);
+    rtl_sr(R_DX,&s0,2);
   }
   else {
-    TODO();
+    rtl_sari(&reg_l(R_EDX), &reg_l(R_EAX), 0x1f);
   }
 
   print_asm(decinfo.isa.is_operand_size_16 ? "cwtl" : "cltd");
