@@ -85,7 +85,20 @@ make_EHelper(inc) {
 }
 
 make_EHelper(dec) {
-  TODO();
+  /* pa2.2
+   * 2020-12-5
+   * NOTE: dec does not change CF
+   * use registers: s0, s1
+   */
+  rtl_li(&s1, 0x1);
+  rtl_sub(&s0, &id_dest->val, &s1);
+  // write back to the operand
+  operand_write(id_dest, &s0);
+  // update ZF and SF
+  rtl_update_ZFSF(&s0, id_dest->width);
+  // update OF
+  rtl_is_sub_overflow(&s1, &s0, &id_dest->val, &s1, id_dest->width);
+  rtl_set_OF(&s1);
 
   print_asm_template1(dec);
 }
