@@ -25,16 +25,18 @@ static inline make_DopHelper(SI) {
 
   op->type = OP_TYPE_IMM;
 
-  /* pa2.1
-   * 2020-12-1
-   * usage register: s0, s1
+  /* TODO: Use instr_fetch() to read `op->width' bytes of memory
+   * pointed by 'pc'. Interpret the result as a signed immediate,
+   * and assign it to op->simm.
+   *
+   op->simm = ???
    */
+  /* PA2.1 */
   s0 = instr_fetch(pc, op->width);
-  rtl_sext(&s1, &s0, op->width);
-  op->simm = s1;
-  if (load_val) {
-    rtl_li(&op->val, op->simm);
-  }
+  rtl_sext(&s0, &s0, op -> width);
+  op -> simm = s0;
+
+  rtl_li(&op->val, op->simm);
 
   print_Dop(op->str, OP_STR_SIZE, "$0x%x", op->simm);
 }
