@@ -61,5 +61,5 @@ make_EHelper(jmp);
 
 /* pa2.2
  * 2020-12-5
- * test code: goldbach.c
+ * test code: 
  */
