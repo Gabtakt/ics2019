@@ -83,3 +83,9 @@ make_EHelper(jmp_rm);
  * test code: shift.c
  */
 make_EHelper(shr);
+
+/* pa2.2
+ * 2020-12-6
+ * test code: shuixianhua.c
+ */
+make_EHelper(mul);
