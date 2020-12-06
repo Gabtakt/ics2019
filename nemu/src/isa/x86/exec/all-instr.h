@@ -77,3 +77,9 @@ make_EHelper(imul1);
  */
 make_EHelper(call_rm);
 make_EHelper(jmp_rm);
+
+/* pa2.2
+ * 2020-12-6
+ * test code: shift.c
+ */
+make_EHelper(shr);
