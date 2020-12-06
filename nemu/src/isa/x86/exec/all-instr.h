@@ -61,5 +61,6 @@ make_EHelper(jmp);
 
 /* pa2.2
  * 2020-12-5
- * test code: 
+ * test code: load-store.c
  */
+make_EHelper(movsx);
