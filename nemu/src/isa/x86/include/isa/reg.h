@@ -30,6 +30,8 @@ typedef struct {
       rtlreg_t eax, ecx, edx, ebx, esp, ebp, esi, edi;
     };
   };
+  // Do NOT fucking change the order of pc!
+  vaddr_t pc;
 
   /* pa2.1
    * 2020-12-2
@@ -58,13 +60,10 @@ typedef struct {
       uint32_t IF : 1;
       uint32_t : 1;
       uint32_t OF : 1;
-      uint32_t : 20;
     } EFLAGS;
     uint32_t eflags_val;
   } ;
   
-  vaddr_t pc;
-
 } CPU_state;
 
 

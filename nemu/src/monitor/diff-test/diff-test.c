@@ -85,8 +85,6 @@ static void checkregs(CPU_state *ref, vaddr_t pc) {
   if (!isa_difftest_checkregs(ref, pc)) {
     extern void isa_reg_display(void);
     isa_reg_display();
-    printf("%x\n%x\n%x\n%x\n%x\n%x\n%x\n%x\n%x\n",ref->pc,ref->eax,
-    ref->ecx,ref->edx,ref->ebx,ref->esp,ref->ebp,ref->esi,ref->edi);
     nemu_state.state = NEMU_ABORT;
     nemu_state.halt_pc = pc;
   }
