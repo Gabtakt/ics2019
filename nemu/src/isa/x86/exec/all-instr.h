@@ -89,3 +89,9 @@ make_EHelper(shr);
  * test code: shuixianhua.c
  */
 make_EHelper(mul);
+
+/* pa2.2
+ * 2020-12-6
+ * test code: sub-longlong.c
+ */
+make_EHelper(sbb);
