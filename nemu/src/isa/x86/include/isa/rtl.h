@@ -48,6 +48,7 @@ static inline void rtl_pop(rtlreg_t* dest) {
   rtl_li(&s0, 4);
   rtl_add(&s1, &reg_l(R_ESP), &s0);
   rtl_mv(&reg_l(R_ESP), &s1);
+  printf (" 0x%x + 0x%x\n",reg_l(R_ESP),s0);
   // reg_l(R_ESP) +=4;
 }
 
