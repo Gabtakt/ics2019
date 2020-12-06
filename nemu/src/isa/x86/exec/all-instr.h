@@ -66,7 +66,13 @@ make_EHelper(jmp);
 make_EHelper(movsx);
 
 /* pa2.2
- * 2020-12-9
+ * 2020-12-6
  * test code: mul-longlong.c
  */
 make_EHelper(imul1);
+
+/* pa2.2
+ * 2020-12-6
+ * test code: recursion.c
+ */
+make_EHelper(call_rm);

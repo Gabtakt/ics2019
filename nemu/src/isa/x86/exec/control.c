@@ -54,7 +54,11 @@ make_EHelper(ret_imm) {
 }
 
 make_EHelper(call_rm) {
-  TODO();
-
+  /* pa2.2
+   * 2020-12-6
+   */
+  rtl_push(&decinfo.seq_pc);
+  decinfo.is_jmp = false;
+  decinfo.seq_pc = id_dest->val;
   print_asm("call *%s", id_dest->str);
 }
