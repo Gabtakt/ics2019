@@ -99,9 +99,16 @@ make_EHelper(shl) {
 }
 
 make_EHelper(shr) {
-  TODO();
-  // unnecessary to update CF and OF in NEMU
-
+   /* pa2.2
+   * 2020-12-6
+   * use registers: s0
+   * NOTE: unnecessary to update CF and OF in NEMU
+   */
+  rtl_shr(&s0, &id_dest->val, &id_src->val);
+  operand_write(id_dest, &s0);
+  // update ZF and SF
+  rtl_update_ZFSF(&s0, id_dest->width);
+  
   print_asm_template2(shr);
 }
 
