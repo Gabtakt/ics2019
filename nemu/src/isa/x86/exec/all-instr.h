@@ -76,3 +76,4 @@ make_EHelper(imul1);
  * test code: recursion.c
  */
 make_EHelper(call_rm);
+make_EHelper(jmp_rm);
