@@ -30,9 +30,8 @@ static inline void rtl_push(const rtlreg_t* src1) {
    * 2020-12-1
    * use rtl_sm to access guest memory, to store 4 bytes data
    */
-  rtl_li(&s0, 4);
-  rtl_sub(&reg_l(R_ESP), &reg_l(R_ESP), &s0);
-  //reg_l(R_ESP) -=4;
+  rtl_li(&t0, 4);
+  rtl_sub(&reg_l(R_ESP), &reg_l(R_ESP), &t0);
   rtl_sm(&reg_l(R_ESP), src1, 4);
 }
 
@@ -43,13 +42,8 @@ static inline void rtl_pop(rtlreg_t* dest) {
    * 2020-12-2
    */
   rtl_lm(dest, &reg_l(R_ESP), 4);
-  // rtl_li(&s0, 4);
-  // rtl_add(&reg_l(R_ESP), &reg_l(R_ESP), &s0);
   rtl_li(&t0, 4);
   rtl_add(&reg_l(R_ESP), &reg_l(R_ESP), &t0);
-  //rtl_mv(&reg_l(R_ESP), &s1);
-  //reg_l(R_ESP) +=4;
-  //printf ("%d\n",reg_l(R_ESP)==s1);
 }
 
 static inline void rtl_is_sub_overflow(rtlreg_t* dest,
