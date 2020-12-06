@@ -47,9 +47,9 @@ static inline void rtl_pop(rtlreg_t* dest) {
   // rtl_add(&reg_l(R_ESP), &reg_l(R_ESP), &s0);
   rtl_li(&s0, 4);
   rtl_add(&s1, &reg_l(R_ESP), &s0);
-  rtl_mv(&reg_l(R_ESP), &s1);
-  printf (" 0x%x + 0x%x\n",reg_l(R_ESP),s0);
-  // reg_l(R_ESP) +=4;
+  //rtl_mv(&reg_l(R_ESP), &s1);
+  reg_l(R_ESP) +=4;
+  printf ("%d\n",reg_l(R_ESP)==s1);
 }
 
 static inline void rtl_is_sub_overflow(rtlreg_t* dest,
