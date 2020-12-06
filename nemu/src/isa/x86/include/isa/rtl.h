@@ -43,9 +43,9 @@ static inline void rtl_pop(rtlreg_t* dest) {
    * 2020-12-2
    */
   rtl_lm(dest, &reg_l(R_ESP), 4);
-  // rtl_li(&s0, 4);
-  // rtl_add(&reg_l(R_ESP), &reg_l(R_ESP), &s0);
-  reg_l(R_ESP) +=4;
+  rtl_li(&s0, 4);
+  rtl_add(&reg_l(R_ESP), &reg_l(R_ESP), &s0);
+  // reg_l(R_ESP) +=4;
 }
 
 static inline void rtl_is_sub_overflow(rtlreg_t* dest,
