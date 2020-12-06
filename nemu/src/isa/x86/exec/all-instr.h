@@ -64,3 +64,9 @@ make_EHelper(jmp);
  * test code: load-store.c
  */
 make_EHelper(movsx);
+
+/* pa2.2
+ * 2020-12-9
+ * test code: mul-longlong.c
+ */
+make_EHelper(imul1);
