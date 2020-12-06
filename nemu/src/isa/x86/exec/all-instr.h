@@ -95,3 +95,9 @@ make_EHelper(mul);
  * test code: sub-longlong.c
  */
 make_EHelper(sbb);
+
+/* pa2.2
+ * 2020-12-6
+ * test code: hello-str.c
+ */
+make_EHelper(neg);
