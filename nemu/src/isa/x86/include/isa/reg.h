@@ -30,6 +30,8 @@ typedef struct {
       rtlreg_t eax, ecx, edx, ebx, esp, ebp, esi, edi;
     };
   };
+  
+  vaddr_t pc;
 
   /* pa2.1
    * 2020-12-2
@@ -62,7 +64,6 @@ typedef struct {
     uint32_t eflags_val;
   } ;
   
-  vaddr_t pc;
 
 } CPU_state;
 
