@@ -110,18 +110,30 @@ make_EHelper(neg) {
   *       set CF to 0 if r/m is 0 else set to 1
   * use registers: s0, s1
   */
-  rtl_li(&s0, 0);
-  rtl_sub(&s1, &s0, &id_dest->val);
-  operand_write(id_dest, &s1);
-  // update ZF and SF
-  rtl_update_ZFSF(&s1, id_dest->width);
-  // set CF
-  rtl_li(&s0, s1 != 0? 1: 0);
-  rtl_set_CF(&s0);
+  // rtl_li(&s0, 0);
+  // rtl_sub(&s1, &s0, &id_dest->val);
+  // operand_write(id_dest, &s1);
+  // // update ZF and SF
+  // rtl_update_ZFSF(&s1, id_dest->width);
+  // // set CF
+  // rtl_li(&s0, s1 != 0? 1: 0);
+  // rtl_set_CF(&s0);
+  // // update OF
+  // rtl_is_sub_overflow(&s1, &s1, &s0, &id_dest->val, id_dest->width);
+  // rtl_set_OF(&s1);
+  s0=0;
+  rtl_sub(&s1,&s0,&id_dest->val);
+  operand_write(id_dest,&s1);
+  // update ZF SF
+  rtl_update_ZFSF(&s1,id_dest->width);
   // update OF
-  rtl_is_sub_overflow(&s1, &s1, &s0, &id_dest->val, id_dest->width);
+  rtl_is_sub_overflow(&s1,&s1,&s0,&id_dest->val,id_dest->width);
   rtl_set_OF(&s1);
   
+  if(id_dest->val!=0)s1=1;
+  else s1=0;
+  rtl_set_CF(&s1);
+
   print_asm_template1(neg);
 }
 
