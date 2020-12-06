@@ -58,9 +58,9 @@ typedef struct {
       uint32_t IF : 1;
       uint32_t : 1;
       uint32_t OF : 1;
-    };
+    } EFLAGS;
     uint32_t eflags_val;
-  } EFLAGS;
+  } ;
   
   vaddr_t pc;
 
