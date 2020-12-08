@@ -105,20 +105,15 @@ int memcmp(const void* s1, const void* s2, size_t n){
   assert(s1 != NULL && s2 != NULL);
   unsigned char *cp1 = (unsigned char *)s1;
   unsigned char *cp2 = (unsigned char *)s2;
-  int ret = 0;
-  while (n--) {
-    ret = *cp1 - *cp2;
-    if (ret != 0) {
-      break;
-    }
+  while (n-- && *cp1 == *cp2) {
     cp1++;
     cp2++;
   }
-  if (ret > 0) {
-    return 1;
-  }
-  if (ret == 0) {
+  if (n == 0) {
     return 0;
+  }
+  if (*cp1 > *cp2) {
+    return 1;
   }
   return -1;
 }
