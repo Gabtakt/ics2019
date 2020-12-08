@@ -41,10 +41,12 @@ char* strncpy(char* dst, const char* src, size_t n) {
 }
 
 char* strcat(char* dst, const char* src) {
-  if(dst == NULL || src == NULL) return dst;
-  char *t = dst;
-  while (*t!='\0') t++;
-  while ((*t++ = *src++) !='\0');
+  assert( dst != NULL && src != NULL);
+  char *cp = dst;
+  while (*cp != '\0') {
+    cp++;
+  }
+  while ((*cp++ = *src++) != '\0');
   return dst;
 }
 
@@ -100,20 +102,19 @@ void* memcpy(void* out, const void* in, size_t n) {
 }
 
 int memcmp(const void* s1, const void* s2, size_t n){
-  assert(s1 != NULL && s2 != NULL);
-  unsigned char *cp1 = (unsigned char *)s1;
-  unsigned char *cp2 = (unsigned char *)s2;
-  while (n-- && *cp1 != '\0' && *cp1 == *cp2) {
-    cp1++;
-    cp2++;
-  }
-  if (*cp1 > *cp2) {
-    return 1;
-  }
-  if (*cp1 == *cp2) {
-    return 0;
-  }
-  return -1;
+assert(s1 != NULL && s2 != NULL);
+	unsigned char *v1 = (unsigned char *)s1;
+	unsigned char *v2 = (unsigned char *)s2;
+	int ret = 0;
+	while(n -- ) {
+		ret = *v1  - *v2;
+		if(ret != 0) break;
+		v1 ++;
+		v2 ++;
+	}
+	if(ret > 0) ret = 1;
+	else if(ret < 0) ret = -1;
+	return ret;
 }
 
 #endif
