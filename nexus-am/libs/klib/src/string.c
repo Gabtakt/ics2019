@@ -41,28 +41,26 @@ char* strncpy(char* dst, const char* src, size_t n) {
 }
 
 char* strcat(char* dst, const char* src) {
-  assert( dst != NULL && src != NULL);
-  char *cp = dst;
-  while (*cp != '\0') {
-    cp++;
-  }
-  while ((*cp++ = *src++) != '\0');
+  if(dst == NULL || src == NULL) return dst;
+  char *t = dst;
+  while (*t!='\0') t++;
+  while ((*t++ = *src++) !='\0');
   return dst;
 }
 
 int strcmp(const char* s1, const char* s2) {
   assert(s1 != NULL && s2 != NULL);
-  while(*s1 != '\0' && *s1 == *s2 ) {
-		s1 ++;
-		s2 ++;
-	}
-	
-	int ret = *(unsigned char *)s1 - *(unsigned char *)s2;
-	
-	if(ret > 0) ret = 1;
-	else if(ret < 0) ret = -1;
-	
-	return  ret;
+  while (*s1 != '\0' && *s1 == *s2) {
+    s1++;
+    s2++;
+  }
+  if (*(unsigned char *)s1 > *(unsigned char *)s2) {
+    return 1;
+  }
+  if (*s1 == *s2) {
+    return 0;
+  }
+  return -1;
 }
 
 int strncmp(const char* s1, const char* s2, size_t n) {
