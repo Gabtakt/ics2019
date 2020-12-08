@@ -109,7 +109,7 @@ int memcmp(const void* s1, const void* s2, size_t n){
     cp1++;
     cp2++;
   }
-  if (n == 0) {
+  if (n == -1) {
     return 0;
   }
   if (*cp1 > *cp2) {
