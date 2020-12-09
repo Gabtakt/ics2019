@@ -109,3 +109,4 @@ make_EHelper(out);
 make_EHelper(in);
 make_EHelper(oprand_size);
 make_EHelper(div);
+make_EHelper(cwtl);
