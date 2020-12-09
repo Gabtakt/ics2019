@@ -101,3 +101,8 @@ make_EHelper(sbb);
  * test code: hello-str.c
  */
 make_EHelper(neg);
+
+/* pa2.3
+ * 2020-12-9
+ */
+make_EHelper(out);
