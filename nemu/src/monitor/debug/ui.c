@@ -80,8 +80,7 @@ static int cmd_info(char *args) {
  * because do not need it(will make expr get a bad expression)
  *  */
 static int cmd_p(char *args) {
-  //char *args = strtok(NULL, " ");
-  if (args == NULL) {
+  if (arg == NULL) {
     printf("the commond 'p' miss parameters.\n");
   }
   else {
