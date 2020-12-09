@@ -75,9 +75,12 @@ static int cmd_info(char *args) {
 /* pa1.2
  * 2020-11-28
  * implements commond p
+ * UPDATE: 2020-12-9
+ * delete the first code 'char *args = strtok(NULL, " ");'
+ * because do not need it(will make expr get a bad expression)
  *  */
 static int cmd_p(char *args) {
-  //char *arg = strtok(NULL, " ");
+  //char *args = strtok(NULL, " ");
   if (args == NULL) {
     printf("the commond 'p' miss parameters.\n");
   }
