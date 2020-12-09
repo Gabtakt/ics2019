@@ -106,3 +106,4 @@ make_EHelper(neg);
  * 2020-12-9
  */
 make_EHelper(out);
+make_EHelper(in);
