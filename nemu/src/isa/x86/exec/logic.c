@@ -132,3 +132,43 @@ make_EHelper(not) {
 
   print_asm_template1(not);
 }
+
+make_EHelper(rol) {
+  /* Pa2.3
+   * 2020-12-9
+   * NOTE: ring shift left , when only shift one bit
+   *                          Operation
+      temp ← COUNT;
+      WHILE (temp ≠ 0)
+      DO
+      tmpcf ← high-order bit of (r/m);
+      r/m ← r/m * 2 + (tmpcf);
+      temp ← temp - 1;
+      OD;
+      IF COUNT = 1
+      THEN
+      IF high-order bit of r/m ≠ CF
+      THEN OF ← 1;
+      ELSE OF ← 0;
+      FI;
+      ELSE OF ← undefined;
+      FI;
+   * use registers: s0, s1
+   */
+	rtl_mv(&s0, &id_dest->val);
+  int i = 0;
+	for( ; i < id_src->val; i++)	{
+		rtl_msb(&s1, &s0, id_dest->width);
+		s0 = s0 << 1;
+		s0 |= s1;
+		rtl_set_CF(&s1);
+	}
+  operand_write(id_dest, &s0);
+	if(id_src -> val == 1){
+    rtl_msb(&s0, &s0, id_dest->width);
+    s0 ^= s1;
+    rtl_set_CF(&s0);
+  }
+	
+	print_asm_template2(rol);
+}

@@ -111,3 +111,4 @@ make_EHelper(oprand_size);
 make_EHelper(div);
 make_EHelper(cwtl);
 make_EHelper(imul3);
+make_EHelper(rol);
