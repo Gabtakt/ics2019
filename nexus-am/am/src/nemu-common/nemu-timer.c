@@ -3,7 +3,7 @@
 #include <nemu.h>
 
 /* system set up time */
-static uint32_t set_up_time;
+//static uint32_t set_up_time;
 
 size_t __am_timer_read(uintptr_t reg, void *buf, size_t size) {
   switch (reg) {
