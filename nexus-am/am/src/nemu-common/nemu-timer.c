@@ -3,7 +3,7 @@
 #include <nemu.h>
 
 /* system set up time */
-//static uint32_t set_up_time;
+static uint32_t set_up_time;
 
 size_t __am_timer_read(uintptr_t reg, void *buf, size_t size) {
   switch (reg) {
@@ -13,9 +13,9 @@ size_t __am_timer_read(uintptr_t reg, void *buf, size_t size) {
      */
     case _DEVREG_TIMER_UPTIME: {
       _DEV_TIMER_UPTIME_t *uptime = (_DEV_TIMER_UPTIME_t *)buf;
-      // uint64_t time = inl(RTC_ADDR) - set_up_time;
-      // uptime->hi = (uint32_t)(time >> 32);
-      // uptime->lo = (uint32_t)(time & 0xffffffff);
+      uint64_t time = inl(RTC_ADDR) - set_up_time;
+      uptime->hi = (uint32_t)(time >> 32);
+      uptime->lo = (uint32_t)(time & 0xffffffff);
       return sizeof(_DEV_TIMER_UPTIME_t);
     }
     case _DEVREG_TIMER_DATE: {
@@ -33,5 +33,5 @@ size_t __am_timer_read(uintptr_t reg, void *buf, size_t size) {
 }
 
 void __am_timer_init() {
-  //set_up_time = inl(RTC_ADDR);
+  set_up_time = inl(RTC_ADDR);
 }

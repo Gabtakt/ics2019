@@ -45,21 +45,21 @@ make_EHelper(in) {
   /* pa2.3
    * 2020-12-9
    */
-  // switch(id_src->width) {
-  //     case 1:
-  //       s0 = pio_read_b(id_src->val);
-  //       break;
-  //     case 2:
-  //       s0 = pio_read_w(id_src->val);
-  //       break;
-  //     case 4:
-  //       s0 = pio_read_l(id_src->val);
-  //       break;
-  //     default :
-  //       assert(0);
-  //       break;
-  // }
-  // operand_write(id_dest,&s0);
+  switch(id_src->width) {
+      case 1:
+        s0 = pio_read_b(id_src->val);
+        break;
+      case 2:
+        s0 = pio_read_w(id_src->val);
+        break;
+      case 4:
+        s0 = pio_read_l(id_src->val);
+        break;
+      default :
+        assert(0);
+        break;
+  }
+  operand_write(id_dest,&s0);
 
   print_asm_template2(in);
 }
