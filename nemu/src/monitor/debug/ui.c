@@ -77,7 +77,6 @@ static int cmd_info(char *args) {
  * implements commond p
  *  */
 static int cmd_p(char *args) {
-  char *arg = strtok(NULL, " ");
   if (arg == NULL) {
     printf("the commond 'p' miss parameters.\n");
   }
