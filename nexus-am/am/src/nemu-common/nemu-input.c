@@ -4,12 +4,16 @@
 
 #define KEYDOWN_MASK 0x8000
 
+/* pa2.3
+ * 2020-12-9
+ */
 size_t __am_input_read(uintptr_t reg, void *buf, size_t size) {
   switch (reg) {
     case _DEVREG_INPUT_KBD: {
       _DEV_INPUT_KBD_t *kbd = (_DEV_INPUT_KBD_t *)buf;
-      kbd->keydown = 0;
-      kbd->keycode = _KEY_NONE;
+      uint32_t keycode = inl(KBD_ADDR);
+      kbd->keydown = keycode & KEYDOWN_MASK ? 1 : 0;
+      kbd->keycode = keycode;
       return sizeof(_DEV_INPUT_KBD_t);
     }
   }
