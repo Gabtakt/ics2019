@@ -108,3 +108,4 @@ make_EHelper(neg);
 make_EHelper(out);
 make_EHelper(in);
 make_EHelper(oprand_size);
+make_EHelper(div);
