@@ -77,15 +77,15 @@ static int cmd_info(char *args) {
  * implements commond p
  *  */
 static int cmd_p(char *args) {
-  char *arg = strtok(NULL, " ");
-  if (arg == NULL) {
+  //char *arg = strtok(NULL, " ");
+  if (args == NULL) {
     printf("the commond 'p' miss parameters.\n");
   }
   else {
     bool success = true;
-    uint32_t result = expr(arg, &success);
+    uint32_t result = expr(args, &success);
     if (!success) {
-      printf("Invalid expression '%s'\n", arg);
+      printf("Invalid expression '%s'\n", args);
     }
     else {
       printf ("0x%x(%u)\n", result, result);
