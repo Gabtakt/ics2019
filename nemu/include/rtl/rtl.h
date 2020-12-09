@@ -132,12 +132,21 @@ void interpret_rtl_exit(int state, vaddr_t halt_pc, uint32_t halt_ret);
 
 static inline void rtl_not(rtlreg_t *dest, const rtlreg_t* src1) {
   // dest <- ~src1
-  TODO();
+  /* pa2.2
+   * 2020-12-5
+   * connect: x86/exec/logic.c makeDopHelper(not)
+   */
+  *dest = ~(*src1);
 }
 
 static inline void rtl_sext(rtlreg_t* dest, const rtlreg_t* src1, int width) {
   // dest <- signext(src1[(width * 8 - 1) .. 0])
-  TODO();
+  /* pa2.1
+   * 2020-12-1
+   * connect: x86/decode.c makeDopHelper(SI)
+   */
+  int32_t tmp = *src1;
+  *dest = (tmp << (32 - width * 8)) >> (32 - width * 8);
 }
 
 static inline void rtl_setrelopi(uint32_t relop, rtlreg_t *dest,
@@ -148,7 +157,11 @@ static inline void rtl_setrelopi(uint32_t relop, rtlreg_t *dest,
 
 static inline void rtl_msb(rtlreg_t* dest, const rtlreg_t* src1, int width) {
   // dest <- src1[width * 8 - 1]
-  TODO();
+  /* pa2.3
+   * 2020-12-9
+   * first defined to implements make_EHelper(rol)
+   */
+  *dest = (*src1 >> (width * 8 - 1)) & 0x1;
 }
 
 static inline void rtl_mux(rtlreg_t* dest, const rtlreg_t* cond, const rtlreg_t* src1, const rtlreg_t* src2) {

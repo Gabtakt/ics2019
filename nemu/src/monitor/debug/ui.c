@@ -75,6 +75,9 @@ static int cmd_info(char *args) {
 /* pa1.2
  * 2020-11-28
  * implements commond p
+ * UPDATE: 2020-12-9
+ * delete the first code 'char *args = strtok(NULL, " ");'
+ * because do not need it(will make expr get a bad expression)
  *  */
 static int cmd_p(char *args) {
   if (args == NULL) {
@@ -82,9 +85,9 @@ static int cmd_p(char *args) {
   }
   else {
     bool success = true;
-    uint32_t result = expr(arg, &success);
+    uint32_t result = expr(args, &success);
     if (!success) {
-      printf("Invalid expression '%s'\n", arg);
+      printf("Invalid expression '%s'\n", args);
     }
     else {
       printf ("0x%x(%u)\n", result, result);
