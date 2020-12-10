@@ -47,8 +47,22 @@ make_EHelper(pusha) {
   print_asm("pusha");
 }
 
+/* pa3.1
+  * 2020-12-10
+  * pop all registers from stack
+  * NOTE: the value of esp should save in rtl register, after finished
+  * pop all, call rtl_mv to move esp value(actually this is is not necessary,
+  * because after pop all, esp was already recover).
+  */
 make_EHelper(popa) {
-  TODO();
+  rtl_pop(&cpu.edi);
+  rtl_pop(&cpu.esi);
+  rtl_pop(&cpu.ebp);
+  rtl_pop(&s0);
+  rtl_pop(&cpu.ebx);
+  rtl_pop(&cpu.edx);
+  rtl_pop(&cpu.ecx);
+  rtl_pop(&cpu.eax);
 
   print_asm("popa");
 }
