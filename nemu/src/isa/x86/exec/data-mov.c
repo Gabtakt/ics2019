@@ -28,7 +28,21 @@ make_EHelper(pop) {
 }
 
 make_EHelper(pusha) {
-  TODO();
+  /* pa3.1
+   * 2020-12-10
+   * push eax, ecx, edx, ebx, esp, ebp, esi, edi
+   * NOTE: before push all, should save $esp (because push 'x' will change esp)
+   */
+  rtl_mv(&s0, &reg_l(R_ESP));
+  rtl_push(&reg_l(R_EAX));
+  rtl_push(&reg_l(R_ECX));
+  rtl_push(&reg_l(R_EDX));
+  rtl_push(&reg_l(R_EBX));
+  // push $esp
+  rtl_push(&s0);
+  rtl_push(&reg_l(R_EBP));
+  rtl_push(&reg_l(R_ESI));
+  rtl_push(&reg_l(R_EDI));
 
   print_asm("pusha");
 }

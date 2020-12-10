@@ -119,3 +119,4 @@ make_EHelper(rol);
 make_EHelper(lidt);
 int raise_intr(uint32_t,vaddr_t);
 make_EHelper(int);
+make_EHelper(pusha);
