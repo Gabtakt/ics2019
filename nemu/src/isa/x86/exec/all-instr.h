@@ -121,3 +121,4 @@ int raise_intr(uint32_t,vaddr_t);
 make_EHelper(int);
 make_EHelper(pusha);
 make_EHelper(popa);
+make_EHelper(iret);

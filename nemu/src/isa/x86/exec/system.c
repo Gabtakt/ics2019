@@ -46,8 +46,17 @@ make_EHelper(int) {
   difftest_skip_dut(1, 2);
 }
 
+
 make_EHelper(iret) {
-  TODO();
+  /* pa3.1
+   * 2020-12-10
+   * pop pc, cs, eflags from stack, then jump tp target
+   */
+  rtl_pop(&decinfo.jmp_pc);
+  rtl_pop(&cpu.cs);
+  rtl_pop(&cpu.eflags_val);
+  decinfo_set_jmp(true);
+  rtl_j(decinfo.jmp_pc);
 
   print_asm("iret");
 }
