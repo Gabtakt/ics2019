@@ -112,3 +112,8 @@ make_EHelper(div);
 make_EHelper(cwtl);
 make_EHelper(imul3);
 make_EHelper(rol);
+
+/* pa3.1
+ * 2020-12-10
+ */
+make_EHelper(lidt);

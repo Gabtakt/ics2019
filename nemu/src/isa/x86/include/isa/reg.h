@@ -30,7 +30,7 @@ typedef struct {
       rtlreg_t eax, ecx, edx, ebx, esp, ebp, esi, edi;
     };
   };
-  // Do NOT fucking change the order of pc!
+  // Do NOT change the fucking order of pc!
   vaddr_t pc;
 
   /* pa2.1
@@ -60,10 +60,22 @@ typedef struct {
       uint32_t IF : 1;
       uint32_t : 1;
       uint32_t OF : 1;
-    } EFLAGS;
+    } eflags;
     uint32_t eflags_val;
   } ;
-  
+
+  /* pa3.1
+   * 2020-12-10
+   * add IDTR to record a instruction's length and base addr
+   * in IDT
+   */
+  struct {
+    uint16_t limit;
+    uint32_t base;
+  } idtr;
+
+  rtlreg_t cs;
+
 } CPU_state;
 
 
@@ -80,7 +92,7 @@ static inline int check_reg_index(int index) {
  * 2020-12-2
  * add a diefine of reg_f(index)
  */
-#define reg_f(name) (cpu.EFLAGS.name)
+#define reg_f(name) (cpu.eflags.name)
 
 static inline const char* reg_name(int index, int width) {
   extern const char* regsl[];

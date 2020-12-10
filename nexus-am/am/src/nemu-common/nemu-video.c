@@ -2,6 +2,10 @@
 #include <amdev.h>
 #include <nemu.h>
 
+
+int screen_width();
+int screen_height();
+int draw_sync();
 /* pa2.3
  * 2020-12-9
  * info->width = 400

@@ -2,7 +2,11 @@
 #define __COMMON_H__
 
 /* Uncomment these macros to enable corresponding functionality. */
-//#define HAS_CTE
+/* pa3.1
+ * 2020-12-10
+ * defined the macro HAS_CTE to open init_irq() and _cte_init()
+ */
+#define HAS_CTE
 //#define HAS_VME
 
 #include <am.h>
