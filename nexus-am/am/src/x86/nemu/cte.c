@@ -10,15 +10,15 @@ void __am_vecnull();
 
 /* pa3.1
  * 2020-12-10
- * add case to value the ebent
+ * add case to value the event
  */
 _Context* __am_irq_handle(_Context *c) {
   _Context *next = c;
   if (user_handler) {
     _Event ev = {0};
     switch (c->irq) {
-      
-      default: ev.event = _EVENT_ERROR; printf("%d", c->irq); break;
+      case 0x81: ev.event = _EVENT_YIELD; break;
+      default: ev.event = _EVENT_ERROR; break;
     }
 
     next = user_handler(ev, c);
