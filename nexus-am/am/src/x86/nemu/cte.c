@@ -17,8 +17,8 @@ _Context* __am_irq_handle(_Context *c) {
   if (user_handler) {
     _Event ev = {0};
     switch (c->irq) {
-      //case 0x20: ev.event = _EVENT_
-      default: ev.event = _EVENT_ERROR; break;
+      
+      default: ev.event = _EVENT_ERROR; printf("%d", ev.event); break;
     }
 
     next = user_handler(ev, c);
