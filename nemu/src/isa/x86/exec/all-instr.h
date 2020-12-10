@@ -117,3 +117,4 @@ make_EHelper(rol);
  * 2020-12-10
  */
 make_EHelper(lidt);
+int raise_intr(uint32_t,vaddr_t);
