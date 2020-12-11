@@ -17,27 +17,27 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
    * 
    */
 
-  Elf_Ehdr elfheader;
-  Elf_Phdr programheader;
-  size_t offset = 0;
-  size_t p_offset = 0;
-  size_t len = (size_t)sizeof(Elf_Ehdr);
+  // Elf_Ehdr elfheader;
+  // Elf_Phdr programheader;
+  // size_t offset = 0;
+  // size_t p_offset = 0;
+  // size_t len = (size_t)sizeof(Elf_Ehdr);
   
-  ramdisk_read(&elfheader,offset,len);
-  offset = elfheader.e_phoff;
-  for (uint16_t i=0; i<elfheader.e_phnum; i++){
+  // ramdisk_read(&elfheader,offset,len);
+  // offset = elfheader.e_phoff;
+  // for (uint16_t i=0; i<elfheader.e_phnum; i++){
 
-    ramdisk_read(&programheader,offset,(size_t)sizeof(Elf_Phdr));
-    offset+=sizeof(Elf_Phdr);
-    if(programheader.p_type == PT_LOAD){
-      uint8_t buf[programheader.p_filesz];
-      ramdisk_read(&buf,programheader.p_offset,programheader.p_filesz);
-      memcpy((void*)programheader.p_vaddr,&buf,programheader.p_filesz);
-      memset((void*)(programheader.p_vaddr+programheader.p_filesz),0,(programheader.p_memsz-programheader.p_filesz));
-    }
+  //   ramdisk_read(&programheader,offset,(size_t)sizeof(Elf_Phdr));
+  //   offset+=sizeof(Elf_Phdr);
+  //   if(programheader.p_type == PT_LOAD){
+  //     uint8_t buf[programheader.p_filesz];
+  //     ramdisk_read(&buf,programheader.p_offset,programheader.p_filesz);
+  //     memcpy((void*)programheader.p_vaddr,&buf,programheader.p_filesz);
+  //     memset((void*)(programheader.p_vaddr+programheader.p_filesz),0,(programheader.p_memsz-programheader.p_filesz));
+  //   }
 
-  }
-  return elfheader.e_entry;
+  //}
+  //return elfheader.e_entry;
 
   // Elf_Ehdr elf_header;
   // // read the elf header file from start
@@ -61,6 +61,7 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
   //   phoff += sizeof(Elf_Phdr);
   // }
   // return elf_header.e_entry;
+  return 0;
 }
 
 void naive_uload(PCB *pcb, const char *filename) {
