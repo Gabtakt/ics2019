@@ -20,7 +20,7 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
   ramdisk_read(&elf_header, 0x0, sizeof(Elf_Ehdr));
   size_t phoff = elf_header.e_phoff;
   uint64_t phoff2 = elf_header.e_phoff;
-  printf("%d %d",phoff, phoff2);
+  printf("%d %d ",phoff, phoff2);
   uint16_t e_phnum = elf_header.e_phnum;
   Elf_Phdr program_header;
   while (e_phnum--) {
@@ -37,6 +37,8 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
       memset((void *)program_header.p_vaddr + program_header.p_filesz, 0, program_header.p_memsz - program_header.p_filesz);
     }
     phoff += sizeof(Elf_Phdr);
+    phoff2 += sizeof(Elf_Phdr);
+    printf("%d %d ",phoff, phoff2);
   }
   return elf_header.e_entry;
 }
