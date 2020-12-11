@@ -19,13 +19,13 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
   // read the elf header file from start
   ramdisk_read(&elf_header, 0x0, sizeof(Elf_Ehdr));
   size_t phoff = elf_header.e_phoff;
-  uint64_t phoff2 = elf_header.e_phoff;
+  uint32_t phoff2 = elf_header.e_phoff;
   printf("%d %d ",phoff, phoff2);
   uint16_t e_phnum = elf_header.e_phnum;
   Elf_Phdr program_header;
   while (e_phnum--) {
     // read all the program header file
-    ramdisk_read(&program_header, phoff2, (size_t)sizeof(Elf_Phdr));
+    ramdisk_read(&program_header, phoff2, sizeof(Elf_Phdr));
     /* the segment should be loaded,
      * Mem[p_vaddr + p_filesz - 1, p_vaddr] <- Mem[p_offset + p_filesz - 1, p_offset]
      * Mem[p_vaddr + p_filesz + p_memsz - 1, p_vaddr + p_filesz] <- 0
