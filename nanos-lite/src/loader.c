@@ -19,10 +19,9 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
   // read the elf header file from start
   ramdisk_read(&elf_header, 0x0, sizeof(Elf_Ehdr));
   uint64_t phoff = elf_header.e_phoff;
-  //uint16_t e_phnum = elf_header.e_phnum;
+  uint16_t e_phnum = elf_header.e_phnum;
   Elf_Phdr program_header;
-  uint16_t i = 0;
-  for(; i < elf_header.e_phnum; i++) {
+  while (e_phnum--) {
     // read all the program header file
     ramdisk_read(&program_header, phoff, sizeof(Elf_Phdr));
     /* the segment should be loaded,
@@ -33,7 +32,7 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
       uint8_t buf[program_header.p_filesz];
       ramdisk_read(&buf, program_header.p_offset, program_header.p_filesz);
       memcpy((void *)program_header.p_vaddr, &buf, program_header.p_filesz);
-      memset((void *)program_header.p_vaddr + program_header.p_filesz, 0, program_header.p_memsz);
+      memset((void *)program_header.p_vaddr + program_header.p_filesz, 0, program_header.p_memsz - program_header.p_filesz);
     }
     phoff += sizeof(Elf_Phdr);
   }
