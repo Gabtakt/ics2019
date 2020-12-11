@@ -15,23 +15,15 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
    * 2020-12-11
    * in this step, parameter 'pcb' and 'filename' can be ignored
    */
-  // Elf_Ehdr elf_header;
-  // Elf_Phdr program_header;
-  // size_t phoff = 0;
-  // size_t len = (size_t)sizeof(Elf_Ehdr);
-  
-  // ramdisk_read(&elf_header,phoff,len);
-  // phoff = elf_header.e_phoff;
   Elf_Ehdr elf_header;
-  Elf_Phdr program_header;
   size_t len = (size_t)sizeof(Elf_Ehdr);
   size_t offset = 0;
   // read the elf header file from start
   ramdisk_read(&elf_header, offset, len);
   size_t phoff = elf_header.e_phoff;
-  // //uint16_t e_phnum = elf_header.e_phnum;
-  uint16_t i = 0;
-  for ( ; i < elf_header.e_phnum; i++) {
+  uint16_t e_phnum = elf_header.e_phnum;
+  Elf_Phdr program_header;
+  while (e_phnum--) {
     // read all the program header file
     ramdisk_read(&program_header, phoff, (size_t)sizeof(Elf_Phdr));
     /* the segment should be loaded,
