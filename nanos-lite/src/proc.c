@@ -25,7 +25,10 @@ void init_proc() {
   Log("Initializing processes...");
 
   // load program here
-
+  /* pa3.2
+   * 2020-12-11
+   */
+  naive_uload(NULL, NULL);
 }
 
 _Context* schedule(_Context *prev) {
