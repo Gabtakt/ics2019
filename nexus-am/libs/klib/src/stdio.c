@@ -108,7 +108,7 @@ int vsprintf(char *out, const char *fmt, va_list ap) {
               *str++ = tmp + '0';
             }
             else {
-              *str++ = tmp + 'a';
+              *str++ = tmp + 'a' - 0xa;
             }
             len++;
             hex /= 16;
