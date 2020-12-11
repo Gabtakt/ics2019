@@ -81,11 +81,50 @@ int vsprintf(char *out, const char *fmt, va_list ap) {
         }
         break;
       }
-      case 'c':{
+      case 'c':
+      {
         *str++ = (char)va_arg(ap,int);
         ret++;
         break;
-      }    
+      }
+      case 'x':
+      {
+        *str++ = '0';
+        *str++ = 'x';
+        uint32_t hex = va_arg(ap,uint32_t);
+        if (hex == 0) {
+          *str++ = '0';
+          ret += 3;
+        }
+        else {
+          /* in this step, we get a reversed string,
+           * e.g: "abcd" will be transfer "dcba"
+           */
+          int len = 0;
+          while (hex != 0) {
+            uint32_t tmp = hex % 0x10;
+            if (tmp < 0xa) {
+              *str++ = tmp + '0';
+            }
+            else {
+              *str++ = tmp + 'a';
+            }
+            len++;
+            hex /= 16;
+          }
+          // reverse the string
+          int i = 1;
+          int mid = len / 2;
+          char tmp;
+          for ( ; i <= mid; i++) {
+            tmp = *(str - (len - i + 1));
+            *(str - (len - i + 1)) = *(str - i);
+            *(str - i) = tmp;
+          }
+          ret += (len + 2);
+        }
+        break;
+      }  
       default:
         ret = -1;
         break;
