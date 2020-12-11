@@ -15,7 +15,7 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
    * 2020-12-11
    * in this step, parameter 'pcb' and 'filename' can be ignored
    */
-    Elf_Ehdr elfheader;
+  Elf_Ehdr elfheader;
   Elf_Phdr programheader;
   size_t offset = 0;
   size_t len = (size_t)sizeof(Elf_Ehdr);
@@ -24,14 +24,19 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
   offset = elfheader.e_phoff;
   for (uint16_t i=0; i<elfheader.e_phnum; i++){
 
-    ramdisk_read(&programheader,offset,(size_t)sizeof(Elf_Phdr));
-    offset+=sizeof(Elf_Phdr);
-    if(programheader.p_type == PT_LOAD){
+    // read all the program header file
+    ramdisk_read(&programheader, offset, (size_t)sizeof(Elf_Phdr));
+    /* the segment should be loaded,
+     * Mem[p_vaddr + p_filesz - 1, p_vaddr] <- Mem[p_offset + p_filesz - 1, p_offset]
+     * Mem[p_vaddr + p_filesz + p_memsz - 1, p_vaddr + p_filesz] <- 0
+     */
+    if (programheader.p_type == PT_LOAD) {
       uint8_t buf[programheader.p_filesz];
-      ramdisk_read(&buf,programheader.p_offset,programheader.p_filesz);
-      memcpy((void*)programheader.p_vaddr,&buf,programheader.p_filesz);
-      memset((void*)(programheader.p_vaddr+programheader.p_filesz),0,(programheader.p_memsz-programheader.p_filesz));
+      ramdisk_read(&buf, programheader.p_offset, programheader.p_filesz);
+      memcpy((void *)programheader.p_vaddr, &buf, programheader.p_filesz);
+      memset((void *)programheader.p_vaddr + programheader.p_filesz, 0, programheader.p_memsz - programheader.p_filesz);
     }
+    offset += sizeof(Elf_Phdr);
 
   }
   return elfheader.e_entry;
