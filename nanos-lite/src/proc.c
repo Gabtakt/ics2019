@@ -28,7 +28,7 @@ void init_proc() {
   /* pa3.2
    * 2020-12-11
    */
-  //naive_uload(NULL, NULL);
+  naive_uload(NULL, NULL);
 }
 
 _Context* schedule(_Context *prev) {
