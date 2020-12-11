@@ -28,7 +28,7 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
   size_t offset = 0;
   // read the elf header file from start
   ramdisk_read(&elf_header, offset, len);
-  uint64_t phoff = elf_header.e_phoff;
+  size_t phoff = elf_header.e_phoff;
   // //uint16_t e_phnum = elf_header.e_phnum;
   uint16_t i = 0;
   for ( ; i < elf_header.e_phnum; i++) {
