@@ -137,9 +137,8 @@ make_EHelper(lea) {
 make_EHelper(movsb) {
   rtl_lm(&s0, &cpu.esi, 1);
   rtl_sm(&cpu.edi, &s0, 1);
-  rtl_li(&s0, 1);
-  rtl_add(&cpu.esi, &cpu.esi, &s0);
-  rtl_add(&cpu.edi, &cpu.edi, &s0);
+  cpu.esi += 1;
+  cpu.edi += 1;
 
   print_asm("movsb  %ds:(%esi),%es:(%edi)");
 }
