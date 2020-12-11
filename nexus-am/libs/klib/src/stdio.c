@@ -88,6 +88,7 @@ int vsprintf(char *out, const char *fmt, va_list ap) {
         break;
       }
       case 'x':
+      case 'X':
       {
         *str++ = '0';
         *str++ = 'x';
