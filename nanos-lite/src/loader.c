@@ -18,7 +18,6 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
     Elf_Ehdr elfheader;
   Elf_Phdr programheader;
   size_t offset = 0;
-  size_t p_offset = 0;
   size_t len = (size_t)sizeof(Elf_Ehdr);
   
   ramdisk_read(&elfheader,offset,len);
