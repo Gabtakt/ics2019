@@ -122,3 +122,8 @@ make_EHelper(int);
 make_EHelper(pusha);
 make_EHelper(popa);
 make_EHelper(iret);
+
+/* pa3.2
+ * 2020-12-11
+ */
+make_EHelper(movsb);

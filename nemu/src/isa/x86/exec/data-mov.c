@@ -129,3 +129,17 @@ make_EHelper(lea) {
   operand_write(id_dest, &id_src->addr);
   print_asm_template2(lea);
 }
+
+/* pa3.2
+ * 2020-12-11
+ * when run nanos-lite
+ */
+make_EHelper(movsb) {
+  rtl_lm(&s0, &cpu.esi, 1);
+  rtl_sm(&cpu.edi, &s0, 1);
+  rtl_li(&s0, 1);
+  rtl_add(&cpu.esi, &cpu.esi, &s0);
+  rtl_add(&cpu.edi, &cpu.edi, &s0);
+
+  print_asm("movsb  %ds:(%esi),%es:(%edi)");
+}
