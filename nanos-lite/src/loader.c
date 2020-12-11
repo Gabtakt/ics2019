@@ -16,11 +16,11 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
    * in this step, parameter 'pcb' and 'filename' can be ignored
    */
   Elf_Ehdr elf_header;
+  Elf_Phdr program_header;
   // read the elf header file from start
-  ramdisk_read(&elf_header, 0x0, (size_t)sizeof(Elf_Ehdr));
+  ramdisk_read(&elf_header, (size_t)0, (size_t)sizeof(Elf_Ehdr));
   uint64_t phoff = elf_header.e_phoff;
   //uint16_t e_phnum = elf_header.e_phnum;
-  Elf_Phdr program_header;
   uint16_t i = 0;
   for ( ; i < elf_header.e_phnum; i++) {
     // read all the program header file
