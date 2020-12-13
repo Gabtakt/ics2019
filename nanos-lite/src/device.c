@@ -43,7 +43,7 @@ size_t events_read(void *buf, size_t offset, size_t len) {
     }
   }
   else {
-    ret = sprintf("t %u\n", uptime());
+    ret = sprintf(buf, "t %u\n", uptime());
   }
   return ret;
 }
