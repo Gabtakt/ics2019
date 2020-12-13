@@ -4,6 +4,7 @@
 int sys_yield();
 void sys_exit(uintptr_t arg);
 int sys_write(int fd, const void *buf, size_t len);
+int sys_brk(uintptr_t increment);
 
 /* pa3.2
  * 2020-12-11
@@ -45,4 +46,8 @@ int sys_write(int fd, const void *buf, size_t len) {
     return len;
   }
   return -1;
+}
+
+int sys_brk(uintptr_t increment){ 
+  return 0;
 }
