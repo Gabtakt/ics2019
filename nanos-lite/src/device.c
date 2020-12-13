@@ -74,7 +74,7 @@ size_t fb_write(const void *buf, size_t offset, size_t len) {
   offset = offset >> 2;
   dy = offset / width;
   dx = offset % width;
-  draw_rect((uint32_t *)buf, dx, dy, w, h);
+  draw_rect((uint32_t *)buf, dx, dy, pixels_num, h);
   return 0;
 
 
