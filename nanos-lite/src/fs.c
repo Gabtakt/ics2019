@@ -3,6 +3,9 @@
 typedef size_t (*ReadFn) (void *buf, size_t offset, size_t len);
 typedef size_t (*WriteFn) (const void *buf, size_t offset, size_t len);
 
+size_t ramdisk_read(void *buf, size_t offset, size_t len);
+size_t ramdisk_write(void *buf, size_t offset, size_t len);
+
 /* pa3.3
  * 2020-12-13
  */
@@ -132,7 +135,6 @@ size_t fs_write(int fd, const void *buf, size_t len) {
  */
 size_t fs_lseek(int fd, size_t offset, int whence) {
   assert(fd >= 0 && fd < NR_FILES);
-  size_t open_offset = file_table[fd].open_offset;
   switch(whence) {
     case SEEK_SET:
       file_table[fd].open_offset = offset;
