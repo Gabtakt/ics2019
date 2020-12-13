@@ -2,6 +2,8 @@
 #include "syscall.h"
 
 int sys_yield();
+void sys_exit(uintptr_t arg);
+int write(int fd, const void *buf, size_t len);
 
 /* pa3.2
  * 2020-12-11
@@ -32,4 +34,15 @@ int sys_yield() {
 
 void sys_exit(uintptr_t arg) {
   _halt(arg);
+}
+
+int write(int fd, const void *buf, size_t len) {
+  if (fd == 1 || fd == 2) {
+    int i = 0;
+    for ( ; i < len; i++) {
+      _putc(((char *)buf)[i]);
+    }
+    return len;
+  }
+  return -1;
 }
