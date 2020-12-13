@@ -1,6 +1,7 @@
 #include "common.h"
 #include "syscall.h"
 
+/* all syscall funciton declear here*/
 void sys_exit(uintptr_t arg);
 int sys_yield();
 int sys_open(const char *pathname, int flags, int mode);
@@ -10,6 +11,7 @@ int sys_close(int fd);
 int sys_lseek(int fd, size_t offset, int whence);
 int sys_brk(uintptr_t increment);
 
+/* all file system function(used by syscall) */
 int fs_open(const char *pathname, int flags, int mode);
 size_t fs_read(int fd, void *buf, size_t len);
 size_t fs_write(int fd, const void *buf, size_t len);

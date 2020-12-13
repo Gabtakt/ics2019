@@ -3,6 +3,12 @@
 typedef size_t (*ReadFn) (void *buf, size_t offset, size_t len);
 typedef size_t (*WriteFn) (const void *buf, size_t offset, size_t len);
 
+/* pa3.3
+ * 2020-12-13
+ */
+size_t serial_write(const void *buf, size_t offset, size_t len);
+size_t events_read(void *buf, size_t offset, size_t len);
+
 size_t ramdisk_read(void *buf, size_t offset, size_t len);
 size_t ramdisk_write(void *buf, size_t offset, size_t len);
 
@@ -40,8 +46,9 @@ size_t invalid_write(const void *buf, size_t offset, size_t len) {
 /* This is the information about all files in disk. */
 static Finfo file_table[] __attribute__((used)) = {
   {"stdin", 0, 0, 0, invalid_read, invalid_write},
-  {"stdout", 0, 0, 0, invalid_read, invalid_write},
-  {"stderr", 0, 0, 0, invalid_read, invalid_write},
+  {"stdout", 0, 0, 0, invalid_read, serial_write},
+  {"stderr", 0, 0, 0, invalid_read, serial_write},
+  {"/dev/events", 0, 0, 0, events_read, invalid_write},
 #include "files.h"
 };
 
@@ -81,17 +88,13 @@ size_t fs_read(int fd, void *buf, size_t len) {
   assert(len >= 0);
   size_t offset = file_table[fd].disk_offset + file_table[fd].open_offset;
   size_t ret = 0;
-  switch(fd) {
-    // ignore the next file operation
-    case FD_STDIN:
-    case FD_STDOUT:
-    case FD_STDERR:
-      break;
-    default:
-      ret = ramdisk_read(buf, offset, len);
-      fs_lseek(fd, ret, SEEK_CUR);
-      break;
+  if (file_table[fd].read != NULL) {
+    ret = file_table[fd].read(buf, offset, len);
   }
+  else {
+    ret = ramdisk_read(buf, offset, len);
+  }
+  fs_lseek(fd, ret, SEEK_CUR);
   return ret;
 }
 
@@ -107,26 +110,13 @@ size_t fs_write(int fd, const void *buf, size_t len) {
   assert(len >= 0);
   size_t offset = file_table[fd].disk_offset + file_table[fd].open_offset;
   size_t ret = 0;
-  switch(fd) {
-    // ignore the next file operation
-    case FD_STDIN:
-      break;
-    // call _putc() to output to the serial port
-    case FD_STDOUT:
-    case FD_STDERR:
-    {
-      int i = 0;
-      for ( ; i < len; i++) {
-        _putc(((char *)buf)[i]);
-      }
-      ret = len;
-      break;
-    }
-    default:
-      ret = ramdisk_write(buf, offset, len);
-      fs_lseek(fd, ret, SEEK_CUR);
-      break;
+  if (file_table[fd].write != NULL) {
+    ret = file_table[fd].write(buf, offset, len);
   }
+  else {
+      ret = ramdisk_write(buf, offset, len);
+  }
+  fs_lseek(fd, ret, SEEK_CUR);
   return ret;
 }
 

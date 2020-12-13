@@ -53,12 +53,43 @@ int vsprintf(char *out, const char *fmt, va_list ap) {
         int num = va_arg(ap,int);
         if (num == 0) {
           *str++ = '0';
+          ret++;
         }
         else {
           if (num < 0) {
             *str++ = '-';
             num = -num;
           }
+          /* in this step, we get a reversed string,
+           * e.g: "1234" will be transfer "4321"
+           */
+          int len = 0;
+          while (num != 0) {
+            *str++ = num % 10 + '0';
+            len++;
+            num /= 10;
+          }
+          ret += len;
+          // reverse the string
+          int i = 1;
+          int mid = len / 2;
+          char tmp;
+          for ( ; i <= mid; i++) {
+            tmp = *(str - (len - i + 1));
+            *(str - (len - i + 1)) = *(str - i);
+            *(str - i) = tmp;
+          }
+        }
+        break;
+      }
+      case 'u':
+      {
+        uint32_t num = va_arg(ap,uint32_t);
+        if (num == 0) {
+          *str++ = '0';
+          ret++;
+        }
+        else {
           /* in this step, we get a reversed string,
            * e.g: "1234" will be transfer "4321"
            */
