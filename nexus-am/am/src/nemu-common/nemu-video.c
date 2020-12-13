@@ -24,7 +24,6 @@ size_t __am_video_read(uintptr_t reg, void *buf, size_t size) {
 
 /* pa2.3
  * 2020-12-9
- * 
  */
 size_t __am_video_write(uintptr_t reg, void *buf, size_t size) {
   switch (reg) {

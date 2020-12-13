@@ -51,21 +51,45 @@ size_t events_read(void *buf, size_t offset, size_t len) {
 static char dispinfo[128] __attribute__((used)) = {};
 
 size_t dispinfo_read(void *buf, size_t offset, size_t len) {
-  return 0;
+  /* pa3.3
+   * 2020-12-13
+   */
+  if (len > sizeof(dispinfo) - offset) {
+    len = sizeof(dispinfo) - offset;
+  }
+  strncpy((char *)buf, &dispinfo, len);
+  return len;
 }
 
 size_t fb_write(const void *buf, size_t offset, size_t len) {
+  /* pa3.3
+   * 2020-12-13
+   */
+  int dx, dy;
+  int width = screen_width();
+  size_t pixels_num = len >> 2;
+  offset = offset >> 2;
+  dy = offset / width;
+  dx = offset % width;
+  draw_rect((uint32_t *)buf, dx, dy, pixels_num, 1);
   return 0;
 }
 
 size_t fbsync_write(const void *buf, size_t offset, size_t len) {
-  return 0;
+  draw_sync();
+  return len;
 }
 
 void init_device() {
   Log("Initializing devices...");
   _ioe_init();
 
-  // TODO: print the string to array `dispinfo` with the format
-  // described in the Navy-apps convention
+  /* pa3.3
+   * 2020-12-13
+   * print the string to array `dispinfo` with the format
+   * described in the Navy-apps convention
+   */
+  int width = screen_width();
+  int height = screen_height();
+  sprintf(dispinfo, "WIDTH:%d\nHEIGHT:%d\n", width, height);
 }
