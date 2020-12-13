@@ -57,7 +57,7 @@ int _open(const char *path, int flags, mode_t mode) {
   /* pa3.3
    * 2020-12-13
    */
-  return _syscall_(SYS_open, flags, mode);
+  return _syscall_(SYS_open, (uintptr_t)path, flags, mode);
 }
 
 int _write(int fd, void *buf, size_t count) {
@@ -92,7 +92,7 @@ int _close(int fd) {
   /* pa3.3
    * 2020-12-13
    */
-  return _syscall_(SYS_close, fd);
+  return _syscall_(SYS_close, fd, 0, 0);
 }
 
 off_t _lseek(int fd, off_t offset, int whence) {
