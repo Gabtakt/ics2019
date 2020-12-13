@@ -19,6 +19,7 @@ _Context* do_syscall(_Context *c) {
     case SYS_yield: c->GPRx = sys_yield(); break;
     case SYS_exit: sys_exit(a[1]); break;
     case SYS_write: sys_write(a[1], (void *)a[2], a[3]); break;
+    case SYS_brk: sys_brk(a[1]); break;
     default: panic("Unhandled syscall ID = %d", a[0]);
   }
 
