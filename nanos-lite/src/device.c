@@ -65,14 +65,38 @@ size_t fb_write(const void *buf, size_t offset, size_t len) {
   /* pa3.3
    * 2020-12-13
    */
-  int dx, dy;
-  int width = screen_width();
-  size_t pixels_num = len >> 2;
-  offset = offset >> 2;
-  dy = offset / width;
-  dx = offset % width;
-  draw_rect((uint32_t *)buf, dx, dy, pixels_num, 1);
-  return 0;
+  // int dx, dy;
+  // int width = screen_width();
+  // size_t pixels_num = len >> 2;
+  // offset = offset >> 2;
+  // dy = offset / width;
+  // dx = offset % width;
+  // draw_rect((uint32_t *)buf, dx, dy, pixels_num, 1);
+  // return 0;
+  //Log("fb_write\n");
+  
+  int x,y;
+  offset = offset>>2;
+  y = offset / screen_width();
+  x = offset % screen_width();
+  //printf("%d %d\n",x,y);
+  int lenth = len>>2;
+  int len1,len2=0,len3=0;
+
+  len1 = lenth<= (screen_width()-x) ? lenth : screen_width()-x;
+  draw_rect((uint32_t*)buf,x,y,len1,1);
+
+  if((lenth>len1)&&((lenth-len1)>screen_width())){
+    len2 = lenth-len1;
+    draw_rect((uint32_t*)buf+len1,0,y+1,screen_width(),len2/screen_width());
+  }
+
+  if(lenth-len1-len2>0){
+    len3 = lenth-len1-len2;
+    draw_rect((uint32_t*)buf+len1+len2,0,y+len2/screen_width()+1,len3,1);
+  }
+	//draw_rect((uint32_t *)buf,x,y,lenth,1);
+  return len;
 }
 
 size_t fbsync_write(const void *buf, size_t offset, size_t len) {
