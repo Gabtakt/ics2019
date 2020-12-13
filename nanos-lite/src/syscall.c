@@ -3,7 +3,7 @@
 
 int sys_yield();
 void sys_exit(uintptr_t arg);
-int write(int fd, const void *buf, size_t len);
+int sys_write(int fd, const void *buf, size_t len);
 
 /* pa3.2
  * 2020-12-11
@@ -15,9 +15,9 @@ _Context* do_syscall(_Context *c) {
   a[2] = c->GPR3;
   a[3] = c->GPR4;
   switch (a[0]) {
-    //case SYS_exit: sys_exit(a[1]); break;
     case SYS_yield: c->GPRx = sys_yield(); break;
     case SYS_exit: sys_exit(a[1]); break;
+    case SYS_write: sys_write(a[1], a[2], a[3]); break;
     default: panic("Unhandled syscall ID = %d", a[0]);
   }
 
@@ -36,7 +36,7 @@ void sys_exit(uintptr_t arg) {
   _halt(arg);
 }
 
-int write(int fd, const void *buf, size_t len) {
+int sys_write(int fd, const void *buf, size_t len) {
   if (fd == 1 || fd == 2) {
     int i = 0;
     for ( ; i < len; i++) {
