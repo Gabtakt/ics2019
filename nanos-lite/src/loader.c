@@ -10,6 +10,8 @@
 # define Elf_Phdr Elf32_Phdr
 #endif
 
+ramdisk_read(void *buf, size_t offset, size_t len);
+
 static uintptr_t loader(PCB *pcb, const char *filename) {
   /* pa3.2
    * 2020-12-11
