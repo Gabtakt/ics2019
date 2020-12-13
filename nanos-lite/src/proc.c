@@ -2,6 +2,8 @@
 
 #define MAX_NR_PROC 4
 
+naive_uload(PCB *pcb, const char *filename);
+
 static PCB pcb[MAX_NR_PROC] __attribute__((used)) = {};
 static PCB pcb_boot = {};
 PCB *current = NULL;
