@@ -30,7 +30,7 @@ void init_proc() {
   /* pa3.2
    * 2020-12-11
    */
-  naive_uload(NULL, "/bin/hello");
+  naive_uload(NULL, "/bin/dummy");
 }
 
 _Context* schedule(_Context *prev) {
