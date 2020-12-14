@@ -36,14 +36,12 @@ void isa_difftest_attach(void) {
   uint32_t base = cpu.idtr.base;
   ref_difftest_memcpy_from_dut(0x7e00, (void *)&limit, sizeof(limit));
   ref_difftest_memcpy_from_dut(0x7e00 + sizeof(limit), (void *)&base, sizeof(base));
-  // the byte ocde of lidt (0x7e00)
+  // the byte code of lidt (0x7e00)
   uint8_t lidt[] = { 0x0f, 0x01, 0x1d, 0x00, 0x7e, 0x00, 0x00 };
   ref_difftest_memcpy_from_dut(0x7e40, (void *)&lidt, sizeof(lidt));
   CPU_state cpu2 = cpu;
   cpu2.pc = 0x7e40;
 	ref_difftest_setregs(&cpu2);
   ref_difftest_exec(1);
-  // cpu.idtr.limit = cpu2.idtr.limit;
-  // cpu.idtr.base = cpu2.idtr.base;
 	ref_difftest_setregs(&cpu);
 }
