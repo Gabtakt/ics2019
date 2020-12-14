@@ -5,7 +5,7 @@
 void sys_exit(uintptr_t arg);
 int sys_yield();
 int sys_open(const char *pathname, int flags, int mode);
-int sys_read(int fd, const void *buf, size_t len);
+int sys_read(int fd, void *buf, size_t len);
 int sys_write(int fd, const void *buf, size_t len);
 int sys_close(int fd);
 int sys_lseek(int fd, size_t offset, int whence);
@@ -58,7 +58,7 @@ int sys_open(const char *pathname, int flags, int mode) {
   return fs_open(pathname, flags, mode);
 }
 
-int sys_read(int fd, const void *buf, size_t len) {
+int sys_read(int fd, void *buf, size_t len) {
   return fs_read(fd, buf, len);
 }
 
