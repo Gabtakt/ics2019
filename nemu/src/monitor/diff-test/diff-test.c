@@ -145,10 +145,10 @@ void difftest_attach() {
    * call isa_difftest_attach() first, then set is_detach false
    * if not , checkregs will fail( isa_difftest_attach() call difftest_exec(1) will
    * touch off checkregs )*/
-  isa_difftest_attach();
 
   is_detach = false;
   is_skip_ref = false;
   skip_dut_nr_instr = 0;
 
+  isa_difftest_attach();
 }

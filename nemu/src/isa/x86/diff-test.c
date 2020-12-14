@@ -8,18 +8,10 @@ bool isa_difftest_checkregs(CPU_state *ref_r, vaddr_t pc) {
 		ref_r->edi != reg_l(R_EDI) || ref_r->pc != cpu.pc) {
 		return false;
 	}
-  // // magic number: 0x000000C0 == 1100 0000 == mark 'ZF' and 'SF'
-  // // NOTE: ignord to compare 'IF', 'CF', 'OF' here(NEMU has different behavor with QEMU)
-  // uint32_t QEMU_eflags = ref_r->eflags & 0x000000C0;
-  // uint32_t NEMU_eflags = cpu.eflags_val & 0x000000C0;
-  // if (QEMU_eflags != NEMU_eflags) {
-  //   return false;
-  // }
+
 	return true;
 }
 
-  #define ISA_DIFF_ST2 0x1000000
-  #define ISA_DIFF_END2 PMEM_SIZE
 void isa_difftest_attach(void) {
 	/* pa3.3
 	 * 2020-12-14
@@ -38,8 +30,7 @@ void isa_difftest_attach(void) {
    * QEMU_EIP <- 0x7e40
    * QEMU execute once
    * API: nemu/tools/qemu-diff/src/diff-test.c
-   * let QEMU call lidt to implement it
-   * FIXME: bug here
+   * let QEMU execute instruction lidt to implement it
    */
   uint16_t limit = cpu.idtr.limit;
   uint32_t base = cpu.idtr.base;
