@@ -64,6 +64,8 @@ typedef struct {
     uint32_t eflags_val;
   } ;
 
+  rtlreg_t cs;
+
   /* pa3.1
    * 2020-12-10
    * add IDTR to record a instruction's length and base addr
@@ -73,8 +75,6 @@ typedef struct {
     uint16_t limit;
     uint32_t base;
   } idtr;
-
-  rtlreg_t cs;
 
 } CPU_state;
 

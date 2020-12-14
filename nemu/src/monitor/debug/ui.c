@@ -169,11 +169,18 @@ static int cmd_d(char *args) {
   return 0;
 }
 
-/* pa3.3 */
+/* pa3.3 
+ * definded in nemu/src/monitor/diff-test/diff-test.c */
 void difftest_detach();
 void difftest_attach();
+
 static int cmd_detach(char * args) {
   difftest_detach();
+  return 0;
+}
+
+static int cmd_attach(char *args) {
+  difftest_attach();
   return 0;
 }
 
@@ -194,6 +201,7 @@ static struct {
   { "d", "'d N' Delete watchpoint numbered N", cmd_d },
   /* pa3.3 */
   { "detach", "'detach' Quit Diff-Test mode", cmd_detach },
+  { "attach", "'attach' Open Diff-Test mode", cmd_attach }
 };
 
 #define NR_CMD (sizeof(cmd_table) / sizeof(cmd_table[0]))
