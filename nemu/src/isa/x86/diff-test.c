@@ -18,6 +18,9 @@ bool isa_difftest_checkregs(CPU_state *ref_r, vaddr_t pc) {
 	return true;
 }
 
+  #define ISA_DIFF_END1 0x7c00
+  #define ISA_DIFF_ST2 0x1000000
+  #define ISA_DIFF_END2 PMEM_SIZE
 void isa_difftest_attach(void) {
 	/* pa3.3
 	 * 2020-12-14
@@ -29,19 +32,16 @@ void isa_difftest_attach(void) {
 	// ref_difftest_memcpy_from_dut(0, &pmem[0], 0x7c00);
 	// ref_difftest_memcpy_from_dut(0x100000, &pmem[0x100000], PMEM_SIZE);
 	// ref_difftest_setregs(&cpu);
-  #define ISA_DIFF_END1 0x7c00
-  #define ISA_DIFF_ST2 0x1000000
-  #define ISA_DIFF_END2 PMEM_SIZE
   printf("begian@|");
-  //char *mainargs = guest_to_host(0);
+  char *mainargs = guest_to_host(0);
   printf("@|");
-  //ref_difftest_memcpy_from_dut(PC_START - IMAGE_START, mainargs, 0x7c00);
+  ref_difftest_memcpy_from_dut(PC_START - IMAGE_START, mainargs, 0x7c00);
   printf("@@|");
-  //mainargs = (char *)ISA_DIFF_ST2;
-  //ref_difftest_memcpy_from_dut(PC_START - IMAGE_START + ISA_DIFF_ST2, mainargs, ISA_DIFF_END2 - ISA_DIFF_ST2);
+  mainargs = (char *)ISA_DIFF_ST2;
+  ref_difftest_memcpy_from_dut(PC_START - IMAGE_START + ISA_DIFF_ST2, mainargs, ISA_DIFF_END2 - ISA_DIFF_ST2);
   
   printf("@@@|");
-  //ref_difftest_setregs(&cpu);
+  ref_difftest_setregs(&cpu);
 
   printf("@@@@|");
 
