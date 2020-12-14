@@ -138,7 +138,6 @@ static int cmd_w(char *args) {
   else {
     WP *p = new_wp();
     bool success = true;
-    printf("val = %u\n", p->val);
     strcpy(p->expr, arg);
     p->val = expr(p->expr, &success);
     p->count = 0;

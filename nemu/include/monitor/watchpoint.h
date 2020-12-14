@@ -13,7 +13,7 @@ typedef struct watchpoint {
    * expr: the expression of watchpoint
    * val: the value of expression
    * count: hit count
-   *  */
+   */
   char expr[32];
   uint32_t val;
   uint32_t count;
