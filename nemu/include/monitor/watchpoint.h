@@ -20,10 +20,10 @@ typedef struct watchpoint {
   
 } WP;
 
-// WP* new_wp();
-// void free_wp(WP*);
-// void display_wp();
-// bool watch_wp();
-// void delete_wp(int);
+WP* new_wp();
+void free_wp(WP*);
+void display_wp();
+bool watch_wp();
+void delete_wp(int);
 
 #endif
