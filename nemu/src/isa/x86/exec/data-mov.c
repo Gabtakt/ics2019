@@ -137,8 +137,22 @@ make_EHelper(lea) {
 make_EHelper(movsb) {
   rtl_lm(&s0, &cpu.esi, 1);
   rtl_sm(&cpu.edi, &s0, 1);
-  cpu.esi += 1;
-  cpu.edi += 1;
+  reg_l(R_ESI) += 1;
+  reg_l(R_EDI) += 1;
 
   print_asm("movsb  %ds:(%esi),%es:(%edi)");
+}
+
+/* pa3.3
+ * 2020-12-14
+ * when run game
+ */
+make_EHelper(movsw){
+
+  rtl_lm(&s0, &reg_l(R_ESI), 2);
+  rtl_sm(&reg_l(R_EDI), &s0, 2);
+  reg_l(R_ESI) += 2;
+	reg_l(R_EDI) += 2;
+  print_asm("movsw %ds:(%esi),%es:(%edi)");
+
 }

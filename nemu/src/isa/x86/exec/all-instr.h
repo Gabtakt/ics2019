@@ -127,3 +127,9 @@ make_EHelper(iret);
  * 2020-12-11
  */
 make_EHelper(movsb);
+
+/* pa3.3
+ * 2020-12-14
+ * run game
+ */
+make_EHelper(movsw);
