@@ -92,6 +92,7 @@ void init_difftest(char *ref_so_file, long img_size) {
 }
 
 static void checkregs(CPU_state *ref, vaddr_t pc) {
+  printf("call check here");
   if (!isa_difftest_checkregs(ref, pc)) {
     extern void isa_reg_display(void);
     isa_reg_display();
@@ -139,11 +140,15 @@ void difftest_attach() {
 #ifndef DIFF_TEST
   return;
 #endif
-
+  /* pa3.3 
+   * 2020-12-14
+   * call isa_difftest_attach() first, then set is_detach false
+   * if not , checkregs will fail( isa_difftest_attach() call difftest_exec(1) will
+   * touch off checkregs )*/
+  isa_difftest_attach();
 
   is_detach = false;
   is_skip_ref = false;
   skip_dut_nr_instr = 0;
 
-  isa_difftest_attach();
 }
