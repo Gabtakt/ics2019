@@ -30,6 +30,7 @@ void isa_difftest_attach(void) {
 	 */
 	ref_difftest_memcpy_from_dut(0, &pmem[0], 0x7c00);
 	ref_difftest_memcpy_from_dut(0x100000, &pmem[0x100000], PMEM_SIZE - 0x100000);
+	ref_difftest_setregs(&cpu);
 
   /* QEMU_IDTR <- NEMU_IDTR
    * MEM_REF[0x7e05, 0x7e00] <- idtr.base | idtr.limit
@@ -38,6 +39,7 @@ void isa_difftest_attach(void) {
    * QEMU execute once
    * API: nemu/tools/qemu-diff/src/diff-test.c
    * let QEMU call lidt to implement it
+   * FIXME: bug here
    */
   uint16_t limit = cpu.idtr.limit;
   uint32_t base = cpu.idtr.base;
