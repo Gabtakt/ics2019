@@ -12,6 +12,8 @@ bool gdb_connect_qemu(void) {
 }
 
 static bool gdb_memcpy_to_qemu_small(uint32_t dest, void *src, int len) {
+
+  printf("aaa");
   char *buf = malloc(len * 2 + 128);
   assert(buf != NULL);
   int p = sprintf(buf, "M0x%x,%x:", dest, len);

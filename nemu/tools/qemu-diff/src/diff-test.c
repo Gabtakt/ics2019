@@ -14,7 +14,6 @@ void init_isa(void);
 
 void difftest_memcpy_from_dut(paddr_t dest, void *src, size_t n) {
   bool ok = gdb_memcpy_to_qemu(dest, src, n);
-  printf("aaa");
   assert(ok == 1);
 }
 
