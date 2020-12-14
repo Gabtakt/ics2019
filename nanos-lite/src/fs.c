@@ -21,7 +21,7 @@ size_t dispinfo_read(void *buf, size_t offset, size_t len);
  * 2020-12-13
  */
 int fs_open(const char *pathname, int flags, int mode);
-size_t fs_read(int fd, void *buf, size_t len);
+size_t fs_read(int fd, const void *buf, size_t len);
 size_t fs_write(int fd, const void *buf, size_t len);
 size_t fs_lseek(int fd, size_t offset, int whence);
 int fs_close(int fd);
@@ -93,7 +93,7 @@ int fs_open(const char *pathname, int flags, int mode) {
 /* pa3.3
  * 2020-12-13
  */
-size_t fs_read(int fd, void *buf, size_t len) {
+size_t fs_read(int fd, const void *buf, size_t len) {
   assert(fd >= 0 && fd < NR_FILES);
   // out of file size range, change it
   if (file_table[fd].size > 0 && len > file_table[fd].size - file_table[fd].open_offset) {
