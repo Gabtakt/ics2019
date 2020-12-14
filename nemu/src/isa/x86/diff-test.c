@@ -32,6 +32,7 @@ void isa_difftest_attach(void) {
   #define ISA_DIFF_END1 0x7c00
   #define ISA_DIFF_ST2 0x1000000
   #define ISA_DIFF_END2 PMEM_SIZE
+  printf("begian@|");
   char *mainargs = guest_to_host(0);
   printf("@|");
   ref_difftest_memcpy_from_dut(PC_START - IMAGE_START, mainargs, 0x7c00);
