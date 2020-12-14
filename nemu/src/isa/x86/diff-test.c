@@ -32,19 +32,6 @@ void isa_difftest_attach(void) {
 	ref_difftest_memcpy_from_dut(0x100000, &pmem[0x100000], PMEM_SIZE - 0x100000);
 	ref_difftest_setregs(&cpu);
 
-  // printf("begian@|");
-  // char *mainargs = guest_to_host(0);
-  // printf("@|");
-  // ref_difftest_memcpy_from_dut(PC_START + IMAGE_START, mainargs, 0x7c00);
-  // printf("@@|");
-  // mainargs = (char *)ISA_DIFF_ST2;
-  // ref_difftest_memcpy_from_dut(PC_START + IMAGE_START + ISA_DIFF_ST2, mainargs, ISA_DIFF_END2 - ISA_DIFF_ST2);
-  
-  // printf("@@@|");
-  // ref_difftest_setregs(&cpu);
-
-  // printf("@@@@|");
-
   /* QEMU_IDTR <- NEMU_IDTR
    * MEM_REF[0x7e05, 0x7e00] <- idtr.base | idtr.limit
    * MEM_REF[_, 0x7e40] <- lidt (0x7e00)
@@ -53,15 +40,15 @@ void isa_difftest_attach(void) {
    * API: nemu/tools/qemu-diff/src/diff-test.c
    * let QEMU call lidt to implement it
    */
-  // uint16_t limit = cpu.idtr.limit;
-  // uint32_t base = cpu.idtr.base;
-  // ref_difftest_memcpy_from_dut(0x7e00, (void *)&limit, sizeof(limit));
-  // ref_difftest_memcpy_from_dut(0x7e00 + sizeof(limit), (void *)&base, sizeof(base));
-  // // the byte ocde of lidt (0x7e00)
-  // uint8_t lidt[] = { 0x0f, 0x01, 0x1d, 0x00, 0x7e, 0x00, 0x00 };
-  // ref_difftest_memcpy_from_dut(0x7e40, (void *)&lidt, sizeof(lidt));
-  // CPU_state cpu2 = cpu;
-  // cpu2.pc = 0x7e40;
-	// ref_difftest_setregs(&cpu2);
-  // difftest_exec(1);
+  uint16_t limit = cpu.idtr.limit;
+  uint32_t base = cpu.idtr.base;
+  ref_difftest_memcpy_from_dut(0x7e00, (void *)&limit, sizeof(limit));
+  ref_difftest_memcpy_from_dut(0x7e00 + sizeof(limit), (void *)&base, sizeof(base));
+  // the byte ocde of lidt (0x7e00)
+  uint8_t lidt[] = { 0x0f, 0x01, 0x1d, 0x00, 0x7e, 0x00, 0x00 };
+  ref_difftest_memcpy_from_dut(0x7e40, (void *)&lidt, sizeof(lidt));
+  CPU_state cpu2 = cpu;
+  cpu2.pc = 0x7e40;
+	ref_difftest_setregs(&cpu2);
+  difftest_exec(1);
 }
