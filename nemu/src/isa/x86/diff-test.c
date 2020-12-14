@@ -26,9 +26,17 @@ void isa_difftest_attach(void) {
    * QEMU_REG_STATE <- NEMU_REG_STATE
    * API: nemu/tools/qemu-diff/src/diff-test.c
 	 */
-	ref_difftest_memcpy_from_dut(0, &pmem[0], 0x7c00);
-	ref_difftest_memcpy_from_dut(0x100000, &pmem[0x100000], PMEM_SIZE);
-	ref_difftest_setregs(&cpu);
+	// ref_difftest_memcpy_from_dut(0, &pmem[0], 0x7c00);
+	// ref_difftest_memcpy_from_dut(0x100000, &pmem[0x100000], PMEM_SIZE);
+	// ref_difftest_setregs(&cpu);
+  #define ISA_DIFF_END1 0x7c00
+  #define ISA_DIFF_ST2 0x1000000
+  #define ISA_DIFF_END2 PMEM_SIZE
+  char *mainargs = guest_to_host(0);
+  ref_difftest_memcpy_from_dut(PC_START - IMAGE_START, mainargs, 0x7c00);
+  mainargs = (char *)ISA_DIFF_ST2;
+  ref_difftest_memcpy_from_dut(PC_START - IMAGE_START + ISA_DIFF_ST2, mainargs, ISA_DIFF_END2 - ISA_DIFF_ST2);
+  ref_difftest_setregs(&cpu);
 
   /* QEMU_IDTR <- NEMU_IDTR
    * MEM_REF[0x7e05, 0x7e00] <- idtr.base | idtr.limit
