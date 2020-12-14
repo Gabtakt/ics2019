@@ -169,6 +169,14 @@ static int cmd_d(char *args) {
   return 0;
 }
 
+/* pa3.3 */
+void difftest_detach();
+void difftest_attach();
+static int cmd_detach(char * args) {
+  difftest_detach();
+  return 0;
+}
+
 static struct {
   char *name;
   char *description;
@@ -183,8 +191,9 @@ static struct {
   { "p", "'p EXPR' Evaluate the EXPR", cmd_p },
   { "x", "'x N EXPR' Evaluate the EXPR,using the result as staring address which outputs N consecutive 4 bytes in hex", cmd_x },
   { "w", "'w EXPR' When the value of EXPR changed,pause the execution of the program", cmd_w },
-  { "d", "'d N' Delete watchpoint numbered N", cmd_d }
-
+  { "d", "'d N' Delete watchpoint numbered N", cmd_d },
+  /* pa3.3 */
+  { "detach", "'detach' Quit Diff-Test mode", cmd_detach },
 };
 
 #define NR_CMD (sizeof(cmd_table) / sizeof(cmd_table[0]))
