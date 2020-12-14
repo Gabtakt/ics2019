@@ -42,6 +42,8 @@ void isa_difftest_attach(void) {
   CPU_state cpu2 = cpu;
   cpu2.pc = 0x7e40;
 	ref_difftest_setregs(&cpu2);
-  difftest_exec(1);
+  ref_difftest_exec(1);
+  // cpu.idtr.limit = cpu2.idtr.limit;
+  // cpu.idtr.base = cpu2.idtr.base;
 	ref_difftest_setregs(&cpu);
 }

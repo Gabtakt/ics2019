@@ -17,8 +17,6 @@ void difftest_setregs(const void *r) {
 }
 
 void difftest_exec(uint64_t n) {
-
-  printf("difftest_exec call here2");
   cpu_exec(n);
 }
 
