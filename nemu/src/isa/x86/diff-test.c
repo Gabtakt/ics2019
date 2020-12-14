@@ -30,7 +30,6 @@ void isa_difftest_attach(void) {
 	 */
 	ref_difftest_memcpy_from_dut(0, &pmem[0], 0x7c00);
 	ref_difftest_memcpy_from_dut(0x100000, &pmem[0x100000], PMEM_SIZE - 0x100000);
-	ref_difftest_setregs(&cpu);
 
   /* QEMU_IDTR <- NEMU_IDTR
    * MEM_REF[0x7e05, 0x7e00] <- idtr.base | idtr.limit
@@ -51,4 +50,5 @@ void isa_difftest_attach(void) {
   cpu2.pc = 0x7e40;
 	ref_difftest_setregs(&cpu2);
   difftest_exec(1);
+	ref_difftest_setregs(&cpu);
 }
