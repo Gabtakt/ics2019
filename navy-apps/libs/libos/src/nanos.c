@@ -106,7 +106,7 @@ int _execve(const char *fname, char * const argv[], char *const envp[]) {
   /* pa3.3
    * 2020-12-15
    */
-  return _syscall_(SYS_execve, fname, argv, envp);
+  return _syscall_(SYS_execve, (uintptr_t)fname, (uintptr_t)argv, (uintptr_t)envp);
 }
 
 // The code below is not used by Nanos-lite.
