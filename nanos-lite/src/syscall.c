@@ -51,7 +51,12 @@ _Context* do_syscall(_Context *c) {
  * 2020-12-11
  */
 void sys_exit(uintptr_t arg) {
-  _halt(arg);
+  //_halt(arg);
+  /* pa3.3
+   * 2020-12-15
+   * call sys_execve
+   */
+  sys_execve("/bin/init", NULL, NULL);
 }
 
 int sys_yield() {
