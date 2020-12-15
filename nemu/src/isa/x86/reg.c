@@ -97,6 +97,5 @@ bool isa_load(FILE *fp) {
   if (fread(&cpu, size, 1, fp) != 1) {
     return false;
   }
-	ref_difftest_setregs(&cpu);
   return true;
 }

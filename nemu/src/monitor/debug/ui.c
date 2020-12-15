@@ -226,6 +226,7 @@ static int cmd_load(char *args) {
     else {
       printf("load from : %s\n", args);
       fclose(fp);
+      cmd_detach(NULL);
     }
   }
   return 0;
