@@ -200,9 +200,11 @@ static int cmd_save(char * args) {
     }
     else if (isa_save(fp) != true) {
       printf("file %s failed to save.\n", args);
+      fclose(fp);
     }
     else {
       printf("save at : %s\n", args);
+      fclose(fp);
     }
   }
   return 0;
@@ -219,9 +221,11 @@ static int cmd_load(char *args) {
     }
     else if (isa_load(fp) != true) {
       printf("file %s failed to load.\n", args);
+      fclose(fp);
     }
     else {
       printf("load from : %s\n", args);
+      fclose(fp);
     }
   }
   return 0;
