@@ -1,6 +1,6 @@
 #include "nemu.h"
 #include "monitor/diff-test.h"
-void difftest_exec(uint64_t n);
+
 bool isa_difftest_checkregs(CPU_state *ref_r, vaddr_t pc) {
   /* pa2.2 */
   if (ref_r->eax != reg_l(R_EAX) || ref_r->ebx != reg_l(R_EBX) || ref_r->ecx != reg_l(R_ECX) || 
