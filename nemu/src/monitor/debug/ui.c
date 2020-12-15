@@ -184,6 +184,49 @@ static int cmd_attach(char *args) {
   return 0;
 }
 
+/* pa3.3 
+ * definded in nemu/src/isa/x86/reg.c */
+bool isa_save(const FILE *fp);
+bool isa_load(FILE *fp);
+
+static int cmd_save(char * args) {
+  if (args == NULL) {
+    printf("command save expect parameter [path].\n");
+  }
+  else {
+    FILE *fp = fopen(args, "w");
+    if (fp == NULL) {
+      printf("file %s failed to open.\n", args);
+    }
+    else if (isa_save(fp) != true) {
+      printf("file %s failed to save.\n", args);
+    }
+    else {
+      printf("save at : %s\n", args);
+    }
+  }
+  return 0;
+}
+
+static int cmd_load(char *args) {
+  if (args == NULL) {
+    printf("command load expect parameter [path].\n");
+  }
+  else {
+    FILE *fp = fopen(args, "r");
+    if (fp == NULL) {
+      printf("file %s failed to open.\n", args);
+    }
+    else if (isa_load(fp) != true) {
+      printf("file %s failed to load.\n", args);
+    }
+    else {
+      printf("load from : %s\n", args);
+    }
+  }
+  return 0;
+}
+
 static struct {
   char *name;
   char *description;
@@ -201,7 +244,9 @@ static struct {
   { "d", "'d N' Delete watchpoint numbered N", cmd_d },
   /* pa3.3 */
   { "detach", "'detach' Quit Diff-Test mode", cmd_detach },
-  { "attach", "'attach' Open Diff-Test mode", cmd_attach }
+  { "attach", "'attach' Open Diff-Test mode", cmd_attach },
+  { "save", "'save [path]' Save current state to path", cmd_detach },
+  { "load", "'load [path]' Load state file from path", cmd_attach }
 };
 
 #define NR_CMD (sizeof(cmd_table) / sizeof(cmd_table[0]))
