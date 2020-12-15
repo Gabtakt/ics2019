@@ -1,5 +1,6 @@
 #include "common.h"
 #include "syscall.h"
+#include "proc.h"
 
 /* all syscall funciton declear here*/
 void sys_exit(uintptr_t arg);
@@ -10,6 +11,7 @@ int sys_write(int fd, const void *buf, size_t len);
 int sys_close(int fd);
 int sys_lseek(int fd, size_t offset, int whence);
 int sys_brk(uintptr_t increment);
+int sys_execve(const char *fname, char * const argv[], char *const envp[]);
 
 /* all file system function(used by syscall) */
 int fs_open(const char *pathname, int flags, int mode);
@@ -17,6 +19,8 @@ size_t fs_read(int fd, void *buf, size_t len);
 size_t fs_write(int fd, const void *buf, size_t len);
 size_t fs_lseek(int fd, size_t offset, int whence);
 int fs_close(int fd);
+
+extern void naive_uload(PCB *pcb, const char *filename);
 
 /* pa3.2
  * 2020-12-11
@@ -36,6 +40,7 @@ _Context* do_syscall(_Context *c) {
     case SYS_close: c->GPRx = sys_close(a[1]); break;
     case SYS_lseek: c->GPRx = sys_lseek(a[1],a[2],a[3]); break;
     case SYS_brk: c->GPRx = sys_brk(a[1]); break;
+    case SYS_execve: c->GPRx = sys_execve(a[1], a[2], a[3]); break;
     default: panic("Unhandled syscall ID = %d", a[0]);
   }
 
@@ -76,4 +81,9 @@ int sys_lseek(int fd, size_t offset, int whence) {
 
 int sys_brk(uintptr_t increment){ 
   return 0;
+}
+
+int sys_execve(const char *fname, char * const argv[], char *const envp[]) {
+  // FIXME: ignord parameter argv and envp, use them later
+  naive_uload(NULL, fname);
 }
