@@ -245,8 +245,8 @@ static struct {
   /* pa3.3 */
   { "detach", "'detach' Quit Diff-Test mode", cmd_detach },
   { "attach", "'attach' Open Diff-Test mode", cmd_attach },
-  { "save", "'save [path]' Save current state to path", cmd_detach },
-  { "load", "'load [path]' Load state file from path", cmd_attach }
+  { "save", "'save [path]' Save current state to path", cmd_save },
+  { "load", "'load [path]' Load state file from path", cmd_load }
 };
 
 #define NR_CMD (sizeof(cmd_table) / sizeof(cmd_table[0]))
