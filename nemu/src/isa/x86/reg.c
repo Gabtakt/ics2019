@@ -93,9 +93,12 @@ bool isa_save(const FILE *fp) {
 }
 
 bool isa_load(FILE *fp) {
-  size_t size = sizeof(cpu);
-  if (fread(&cpu, size, 1, fp) != 1) {
+  CPU_state cpu2;
+  size_t size = sizeof(cpu2);
+  if (fread(&cpu2, size, 1, fp) != 1) {
     return false;
   }
+	ref_difftest_setregs(&cpu2);
+  cpu = cpu2;
   return true;
 }
