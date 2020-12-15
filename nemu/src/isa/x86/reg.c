@@ -89,12 +89,20 @@ bool isa_save(const FILE *fp) {
   if (fwrite(&cpu, size, 1, fp) != 1) {
     return false;
   }
+  size = PMEM_SIZE;
+  if (fwrite(&pmem, size, 1, fp) != 1) {
+    return false;
+  }
   return true;
 }
 
 bool isa_load(FILE *fp) {
   size_t size = sizeof(cpu);
   if (fread(&cpu, size, 1, fp) != 1) {
+    return false;
+  }
+  size = PMEM_SIZE;
+  if (fread(&pmem, size, 1, fp) != 1) {
     return false;
   }
   return true;
