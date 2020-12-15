@@ -226,6 +226,8 @@ static int cmd_load(char *args) {
     else {
       printf("load from : %s\n", args);
       fclose(fp);
+      // keep QEMU and NEMU in the same state
+      difftest_attach();
     }
   }
   return 0;
